@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import '../style/header.css'
 import { useHistory } from "react-router-dom";
 import { useState } from 'react'
+import { FaBars } from 'react-icons/fa';
+
 
 
 
@@ -30,8 +32,9 @@ function Header() {
 
   <div>
     <div className="header-container">
+
      
-      <button className="profile-btn" onClick={displayLinks}>DISPLAY</button>
+      <button className="toggle-nav-btn" onClick={displayLinks}><FaBars /></button>
       
     </div>
     {  show? <div className="square">

@@ -46,3 +46,9 @@
     align-items: center;
     justify-content: space-around;
 }
+
+.toggle-nav-btn {
+    background: none;
+    border: none;
+    font-size: 25px;
+}

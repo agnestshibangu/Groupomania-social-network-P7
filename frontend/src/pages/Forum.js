@@ -1,3 +1,4 @@
+  
 import React, {  useEffect, useCallback, useState, useContext } from 'react';
 import Axios from "axios";
 import { FaEllipsisV, FaPlus } from 'react-icons/fa';
@@ -22,6 +23,10 @@ export default function Forum() {
      const [isOpen, setIsOpen] = useState(false)
      const [isOpenModal, setIsOpenModal] = useState(false)
     //  const LStoken = localStorage.getItem('token')
+    const userid = dataUser.id
+    const [userId, setUserId] = useState(userid)
+    console.log(userId)
+
      
     function toggle() {
         setIsOpen(!isOpen)
@@ -61,12 +66,17 @@ export default function Forum() {
         let filename = fakePath.replace(/^.*\\/, "");
         setImageUrl(filename)
         const imageUrl = filename
-        //
+        //  
+        setUserId(userId)
 
         Axios.post('http://localhost:3001/api/post', {
+          
             title : title,
             content : content,
-            imageUrl : imageUrl
+            imageUrl : imageUrl, 
+            
+            
+        
         },
         {headers: {
             Authorization: LStoken
@@ -78,7 +88,7 @@ export default function Forum() {
 
     useEffect(() => {
         fetchPosts();
-    }, [fetchPosts, submitPost]);
+    }, []);
 
 
     const deletePost = (id) => {
@@ -123,7 +133,7 @@ export default function Forum() {
                         <FaEllipsisV onClick={toggle} className="three-dots"/>
                     </div>
 
-                    <img className="post-img" src={post.imageUrl} alt=''/>
+                    <img src={post.imageUrl} alt=''/>
                     <p>{post.content}</p>
 
                     <DropdownDelMod open={isOpen}>

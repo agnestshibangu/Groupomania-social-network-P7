@@ -29,15 +29,13 @@ exports.getLastActivityPost = (req, res) => {
         const postObject = req.body;
         if (req.file) {
             postObject.imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-            
         }
-        
         const post = new Post({
             ...postObject
         });
         post.save()
             .then(() => res.status(201).json({ message: 'Post registered !'}))
-            .catch(error => res.status(400).json({ error }));
+            .catch(error => res.status(400).json({ error: message }));
     
     };
 
