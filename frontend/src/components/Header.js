@@ -1,0 +1,51 @@
+import { Link } from 'react-router-dom'
+import '../style/header.css'
+import { useHistory } from "react-router-dom";
+import { useState } from 'react'
+
+
+
+
+function Header() {
+
+  const history = useHistory();
+
+  function redirect() {
+    history.push("/login")
+  }
+
+  function logout() {
+    localStorage.setItem('token', '')
+    localStorage.setItem('id', '')
+    redirect()
+  }
+
+  const [show, setShow] = useState(false)
+
+  function displayLinks() {
+    setShow(!show)
+  }
+
+  return (
+
+  <div>
+    <div className="header-container">
+     
+      <button className="profile-btn" onClick={displayLinks}>DISPLAY</button>
+      
+    </div>
+    {  show? <div className="square">
+
+    <Link className="header-link" to="/">Accueil</Link>
+      <Link className="header-link" to="/profile"> Profile</Link>
+      <Link className="header-link" to="/forum"> forum</Link>
+      <Link className="header-link" to="/login"> login</Link>
+      <Link className="header-link" to="/signup"> signup</Link>
+      <button className="logout-btn" onClick={logout}>Logout</button>
+
+    </div>: null}
+  </div>
+  )
+}
+
+export default Header

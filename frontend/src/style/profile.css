@@ -1,0 +1,109 @@
+
+/*PROFILE*/
+
+
+.profile-container {
+    display: flex;
+    margin: 100px 0 50px 0;
+    padding: 3%;
+    border-radius: 25px;
+    border: solid white 5px;
+    box-shadow: 10px 0px 20px white;
+    flex-direction: row;
+    justify-content: space-bet;
+  }
+  
+  .image-container {
+    min-width: 200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 0 3%;
+  }
+  
+  
+  .vertical-bar {
+    background-color: white;
+    min-width: 3px;
+    height: 200px;
+    margin: 0 5%;
+    border-radius: 30px;
+  }
+  
+  .info-container {
+  margin: 0 3%;
+      width: 65%;
+  
+  }
+  
+  .main-container {
+     margin: 0 50px;
+  }
+
+  .delete-account-button {
+     padding: 10px;
+     border: none; 
+     background-color: rgb(253, 91, 91);
+     box-shadow: 5px 0px 10px rgb(255, 112, 112);
+     border-radius: 10px;
+     height: 70px;
+     cursor: pointer;
+     
+  }
+
+.delete-account-container {
+  width: 30%;
+  height: auto;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  z-index: 1000; 
+  border-radius: 20px;
+
+}
+ 
+.overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1000;
+}
+
+.answer-btn-box {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-answer {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-weight: bolder;
+  margin-top: 10px;
+  height: 40px;
+}
+
+.yes {
+  color: rgb(253, 91, 91);
+}
+
+.delete-profile-msg {
+  margin: 150px auto;
+  width: 40%;
+  height: 160px;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}     
+

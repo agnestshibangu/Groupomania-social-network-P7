@@ -1,0 +1,44 @@
+
+/*LOGIN*/
+
+.form-container { 
+    margin: auto;
+    width: 50%;
+  }
+  
+  .form-container-box{
+    background-color: white;
+    height: auto;
+    width: 100%;
+  }
+  
+  .inputs {
+    margin: auto;
+    width: 70%;
+    padding: 4%;
+    flex-direction: column;
+  }
+  
+  .input {
+    display: flex;
+    justify-content: column;
+    flex-direction: column;
+  }
+  
+  .button-login-container {
+    margin:  auto ;
+    width: 70%;
+    padding: 5%;
+  }
+  
+  .submit-btn-login {
+    width: 100%;
+  }
+
+  .signup-link {
+    text-decoration: underline;
+  }
+
+  .input-file {
+    width: 80%
+  }
