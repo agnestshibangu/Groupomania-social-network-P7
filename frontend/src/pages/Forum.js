@@ -23,16 +23,13 @@ export default function Forum() {
      const [isOpen, setIsOpen] = useState(false)
      const [isOpenModal, setIsOpenModal] = useState(false)
     //  const LStoken = localStorage.getItem('token')
-    const userid = dataUser.id
-    const [userId, setUserId] = useState(userid)
-    console.log(userId)
-
-     
+   
     function toggle() {
         setIsOpen(!isOpen)
        
     }
 
+    //console.log(dataUser)
 
     // redirection if user is not logged //
     function redirectLogin() {
@@ -43,7 +40,7 @@ export default function Forum() {
        if (!LStoken) {
         redirectLogin()
        }
-    }, [])
+    }, [LStoken])
 
     /////////////////////////////////////
    
@@ -59,32 +56,30 @@ export default function Forum() {
         })
     }, [LStoken])
 
-    
-    const submitPost = useCallback(() => {
+
+   const userId = dataUser.id
+   const submitPost = useCallback(() => {
 
         // correct fakepath error
         let filename = fakePath.replace(/^.*\\/, "");
         setImageUrl(filename)
         const imageUrl = filename
         //  
-        setUserId(userId)
-
-        Axios.post('http://localhost:3001/api/post', {
-          
-            title : title,
-            content : content,
-            imageUrl : imageUrl, 
-            
-            
-        
-        },
+       
+        Axios.post('http://localhost:3001/api/post', 
         {headers: {
             Authorization: LStoken
-          }
+          }},
+        {
+            title : title,
+            imageUrl : imageUrl, 
+            content : content, 
+            // userId: dataUser.id
+            
         })
         setIsOpenModal(!isOpenModal)
         setPosts([...posts, {title: title, content: content, image: imageUrl}])
-    }, [content, imageUrl, title, posts, LStoken, isOpenModal ])
+    }, [content, title, fakePath,  posts, LStoken, isOpenModal])
 
     useEffect(() => {
         fetchPosts();
@@ -129,7 +124,8 @@ export default function Forum() {
                 return (
                 <div className="forum-card">
                     <div className="card-title-box">
-                        <h2>{post.title} + {post.id} </h2>
+                        <h2>{post.title}</h2>
+                        <p>post créé par {dataUser.name}</p>
                         <FaEllipsisV onClick={toggle} className="three-dots"/>
                     </div>
 

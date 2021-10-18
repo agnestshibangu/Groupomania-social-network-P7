@@ -6,6 +6,7 @@ const postCtrl = require('./controllers/post')
 const userCtrl = require('./controllers/user')
 const multer = require('./middleware/multer-config')
 const path = require('path');
+const helmet = require('helmet')
 
 
 /// CORS policy ///
@@ -26,15 +27,13 @@ app.use(
 //   next();
 // });
 
-
-
-
-
 // built-in middleware function in Express. it parses incoming requests with JSON payloads and is based on body-parser
 // payload = les données qu'on veut encoder
 app.use(express.json())
 app.use(express.urlencoded({
   extended: true}));
+
+app.use(helmet());
 
 /// Routes ////
 
