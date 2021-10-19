@@ -3,16 +3,18 @@ import AddCommentModal from '../components/AddCommentModal'
 import DataContext from '../DataContext'
 import Axios from "axios";
 
-export default function CommentSection() {
+export default function CommentSection({ postId }) {
 
     const { dataUser, LStoken } = useContext(DataContext)
     const [comments, setComments] = useState([])
     const [isOpenCommentModal, setIsOpenCommentModal] = useState(false)
     const [comment, setComment] = useState('')
+    console.log(postId)
 
-    
+
     const fetchComments = useCallback(() => {
-        Axios.get('http://localhost:3001/api/comment/ofpost/2787',
+        Axios.get(`http://localhost:3001/api/comment/ofpost/${postId}`
+        //,
             // {
             //     headers: {
             //         Authorization: LStoken
@@ -30,7 +32,7 @@ export default function CommentSection() {
 
     useEffect(() => {
         fetchComments();
-    }, []);
+    }, [ ]);
 
 
     const submitComment = useCallback(() => {
@@ -65,7 +67,9 @@ export default function CommentSection() {
             <div className="comment-section">
                 {comments.map((comment) => {
                     return (
-                        <p>{comment.content}</p>
+                        <div className="comment-single">
+                            <p>{comment.content}</p>
+                        </div>
                     )
                 })}
             </div>
