@@ -11,10 +11,12 @@ router.get('/', auth, postCtrl.getAllPosts)
 router.get('/lastactivitypost', postCtrl.getLastActivityPost)
 
 // POST //
-router.post('/', auth, multer, postCtrl.createPost)
+router.post('/', multer, postCtrl.createPost)
+// router.post('/', auth, multer, postCtrl.createPost)
 
 // DELETE //
-router.delete('/:id', auth, postCtrl.deletePost)
+router.delete('/:id', postCtrl.deletePost)
+//router.delete('/:id', auth, postCtrl.deletePost)
 
 // UPDATE //
 router.put('/:id', auth, postCtrl.modifyPost)

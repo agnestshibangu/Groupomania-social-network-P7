@@ -1,0 +1,77 @@
+import React, { useState, useEffect, useCallback, useContext } from 'react'
+import AddCommentModal from '../components/AddCommentModal'
+import DataContext from '../DataContext'
+import Axios from "axios";
+
+export default function CommentSection() {
+
+    const { dataUser, LStoken } = useContext(DataContext)
+    const [comments, setComments] = useState([])
+    const [isOpenCommentModal, setIsOpenCommentModal] = useState(false)
+    const [comment, setComment] = useState('')
+
+    
+    const fetchComments = useCallback(() => {
+        Axios.get('http://localhost:3001/api/comment/ofpost/2787',
+            // {
+            //     headers: {
+            //         Authorization: LStoken
+            //     }
+            // }
+        )
+            .then((response) => {
+                setComments(response.data)
+                console.log(response.data)
+            })
+    },
+        // [LStoken]
+    )
+
+
+    useEffect(() => {
+        fetchComments();
+    }, []);
+
+
+    const submitComment = useCallback(() => {
+
+        console.log(LStoken)
+        Axios.post('http://localhost:3001/api/comment',
+            //  {headers: {
+            //       Authorization: LStoken
+            //  }},
+            {
+                content: comment
+
+            })
+        setIsOpenCommentModal(!isOpenCommentModal)
+        setComments([...comments, { comment: comment }])
+    }, [comment])
+
+
+    return (
+        <div>
+            <button className="add-comment-btn" onClick={() => setIsOpenCommentModal(true)}>Add a comment</button>
+
+            <AddCommentModal open={isOpenCommentModal} onClose={() => setIsOpenCommentModal(false)}>
+                <textarea className="input-content" placeholder="Add a comment" name="content" type="text"
+                    onChange={(e) => {
+                        setComment(e.target.value)
+                    }}></textarea>
+                <button className="submit-btn" onClick={submitComment} >SUBMIT</button>
+            </AddCommentModal>
+
+
+            <div className="comment-section">
+                {comments.map((comment) => {
+                    return (
+                        <p>{comment.content}</p>
+                    )
+                })}
+            </div>
+
+        </div>
+    )
+
+
+}

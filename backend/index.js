@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 // const mysql = require('mysql2')
 const postCtrl = require('./controllers/post')
 const userCtrl = require('./controllers/user')
+const commentCtrl = require('./controllers/comment')
 const multer = require('./middleware/multer-config')
 const path = require('path');
 const helmet = require('helmet')
@@ -33,16 +34,18 @@ app.use(express.json())
 app.use(express.urlencoded({
   extended: true}));
 
-app.use(helmet());
+// app.use(helmet());
 
 /// Routes ////
 
 const userRoutes = require('./routes/user')
 const postRoutes = require('./routes/post')
+const commentRoutes = require('./routes/comment')
 const postforumRoutes = require('./routes/postforum')
 
 app.use('/api/user', userRoutes)
 app.use('/api/post', postRoutes)
+app.use('/api/comment', commentRoutes)
 app.use('/api/postforum', postforumRoutes)
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

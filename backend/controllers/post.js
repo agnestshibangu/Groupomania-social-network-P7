@@ -23,17 +23,17 @@ exports.getLastActivityPost = (req, res) => {
 
 
 // Create a post
-
-
 exports.createPost = (req, res, next) => {
     const postObject = req.body;
     const userId = req.body.userId
+    const userName = req.body.userName
     if (req.file) {
         postObject.imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     }
     const post = new Post({
         ...postObject,
-        userId: userId
+        userId: userId,
+        userName: userName
     });
     post.save()
         .then(() => res.status(201).json({ message: 'Post registered !' }))
@@ -43,7 +43,8 @@ exports.createPost = (req, res, next) => {
 // Delete a post 
 exports.deletePost = (req, res) => {
     Post.findOne({
-        where: { id: req.params.id }
+        where: { id: req.params.id
+                 }
     })
         .then(Post => {
             Post.destroy({ id: req.params.id })
