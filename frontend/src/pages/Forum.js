@@ -22,7 +22,6 @@ export default function Forum() {
     const [imageUrl, setImageUrl] = useState('')
     const [fakePath, setFakePath] = useState('')
     const [isOpen, setIsOpen] = useState(false)
-    const [postId, setPostId] = ('');
     const [isOpenModal, setIsOpenModal] = useState(false)
  
 
@@ -132,7 +131,6 @@ export default function Forum() {
 
 
             {posts.map((post) => {
-                setPostId(post.id)
 
                 return (
                     <div className="forum-card">
@@ -152,16 +150,20 @@ export default function Forum() {
 
                         </div>
 
-                        <p>{post.content}</p>
+                        <p>{post.content} + {post.id}</p>
 
-                        <DropdownDelMod open={isOpen} postId={post.id}>
+
+
+                        <DropdownDelMod open={isOpen} postId={post.id} >
+
+
                             <div className="container-DropdownDelMod">
                                 
 
                                 <div className="container-comments">
                                    
 
-                                <CommentSection />
+                                <CommentSection postId={post.id} />
                                    
 
                                 </div>

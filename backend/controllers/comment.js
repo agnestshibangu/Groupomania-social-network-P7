@@ -12,15 +12,14 @@ exports.getAllComments = (req, res) => {
         .catch(error => res.status(400).json({ error }));
 };
 
-// Create a post
+// Create a comment
 exports.createComment = (req, res, next) => {
     const CommentObject = req.body;
-    const userId = req.body.userId
-    const userName = req.body.userName
+    // const userName = req.body.userName
+     const postId = req.params.postId
     const comment = new Comment({
-        ...CommentObject,
-        userId: userId,
-        userName: userName
+        ...CommentObject, 
+        postId: postId
     });
     comment.save()
         .then(() => res.status(201).json({ message: 'Comment registered !' }))
@@ -51,3 +50,4 @@ exports.getCommentsForOnePost = (req, res, next) => {
         );
              
 };
+

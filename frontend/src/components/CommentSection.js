@@ -3,13 +3,13 @@ import AddCommentModal from '../components/AddCommentModal'
 import DataContext from '../DataContext'
 import Axios from "axios";
 
-export default function CommentSection({ postId }) {
+export default function CommentSection({postId}) {
 
     const { dataUser, LStoken } = useContext(DataContext)
     const [comments, setComments] = useState([])
     const [isOpenCommentModal, setIsOpenCommentModal] = useState(false)
     const [comment, setComment] = useState('')
-    console.log(postId)
+    // console.log(postId)
 
 
     const fetchComments = useCallback(() => {
@@ -29,22 +29,20 @@ export default function CommentSection({ postId }) {
         // [LStoken]
     )
 
-
     useEffect(() => {
         fetchComments();
     }, [ ]);
 
 
     const submitComment = useCallback(() => {
-
         console.log(LStoken)
-        Axios.post('http://localhost:3001/api/comment',
+        Axios.post(`http://localhost:3001/api/comment/${postId}`,
             //  {headers: {
             //       Authorization: LStoken
             //  }},
             {
-                content: comment
-
+                content: comment,
+                
             })
         setIsOpenCommentModal(!isOpenCommentModal)
         setComments([...comments, { comment: comment }])
@@ -53,6 +51,7 @@ export default function CommentSection({ postId }) {
 
     return (
         <div>
+            <h1>{postId}</h1>
             <button className="add-comment-btn" onClick={() => setIsOpenCommentModal(true)}>Add a comment</button>
 
             <AddCommentModal open={isOpenCommentModal} onClose={() => setIsOpenCommentModal(false)}>
