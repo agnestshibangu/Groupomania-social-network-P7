@@ -13,20 +13,20 @@ const helmet = require('helmet')
 /// CORS policy ///
 
 //correct Cross Origin erros
-const cors = require('cors')
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", 'PUT', "DELETE", "PATCH", "OPTIONS"],
-  })
-)
+// const cors = require('cors')
+// app.use(
+//   cors({
+//     origin: "*",
+//     methods: ["GET", "POST", 'PUT', "DELETE", "PATCH", "OPTIONS"],
+//   })
+// )
 
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-//   next();
-// });
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  next();
+});
 
 // built-in middleware function in Express. it parses incoming requests with JSON payloads and is based on body-parser
 // payload = les données qu'on veut encoder

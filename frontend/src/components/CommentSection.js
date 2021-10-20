@@ -51,7 +51,7 @@ export default function CommentSection({postId}) {
 
     return (
         <div>
-            <h1>{postId}</h1>
+            <p>{postId}</p>
             <button className="add-comment-btn" onClick={() => setIsOpenCommentModal(true)}>Add a comment</button>
 
             <AddCommentModal open={isOpenCommentModal} onClose={() => setIsOpenCommentModal(false)}>

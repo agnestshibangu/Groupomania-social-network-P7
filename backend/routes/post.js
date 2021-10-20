@@ -11,7 +11,7 @@ router.get('/', auth, postCtrl.getAllPosts)
 router.get('/lastactivitypost', postCtrl.getLastActivityPost)
 
 // POST //
-router.post('/', multer, postCtrl.createPost)
+router.post('/', auth, multer, postCtrl.createPost)
 // router.post('/', auth, multer, postCtrl.createPost)
 
 // DELETE //

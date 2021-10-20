@@ -23,7 +23,7 @@ export default function Forum() {
     const [fakePath, setFakePath] = useState('')
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenModal, setIsOpenModal] = useState(false)
- 
+
 
     //  const LStoken = localStorage.getItem('token')
 
@@ -72,16 +72,21 @@ export default function Forum() {
         const userId = dataUser.id
         console.log(LStoken)
         Axios.post('http://localhost:3001/api/post',
-            //  {headers: {
-            //       Authorization: LStoken
-            //  }},
             {
                 title: title,
                 content: content,
                 imageUrl: imageUrl,
                 userId: userId,
-                // userName: userName
-            })
+                userName: userName
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': LStoken
+                }
+            }
+
+        )
         setIsOpenModal(!isOpenModal)
         setPosts([...posts, { title: title, content: content, image: imageUrl }])
     }, [content, title, fakePath, userId, posts, LStoken, isOpenModal])
@@ -131,26 +136,28 @@ export default function Forum() {
 
 
             {posts.map((post) => {
+                console.log(post.imageUrl)
 
                 return (
                     <div className="forum-card">
                         <div className="card-title-box">
                             <h2>{post.title} </h2>
-                            <p>post créé par {post.userName}</p>
+                            <p>post créé par</p>
                             <FaEllipsisV onClick={toggle} className="three-dots" />
                         </div>
 
                         <div className="card-body">
-                        
-                            <img className="post-img" src={post.imageUrl} alt='' />
+
+                            <img className="post-img" src={`http://localhost/images/${post.imageUrl}`} alt='' />
                             <div className="container-buttons">
-                                    <button className="delete-btn" onClick={() => { deletePost(post.id, post.userId) }} >DELETE</button>
-                                    <button className="modify-btn" >MODIFY</button>
-                                </div>
+                                <button className="delete-btn" onClick={() => { deletePost(post.id, post.userId) }} >DELETE</button>
+                                <button className="modify-btn" >MODIFY</button>
+                            </div>
 
                         </div>
 
-                        <p>{post.content} + {post.id}</p>
+                        <p>{post.content} </p>
+                        <p> id du post : {post.id}</p>
 
 
 
@@ -158,13 +165,13 @@ export default function Forum() {
 
 
                             <div className="container-DropdownDelMod">
-                                
+
 
                                 <div className="container-comments">
-                                   
 
-                                <CommentSection postId={post.id} />
-                                   
+
+                                    <CommentSection postId={post.id} />
+
 
                                 </div>
 

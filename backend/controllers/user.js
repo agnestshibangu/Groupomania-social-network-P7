@@ -111,7 +111,7 @@ exports.login = (req, res, next) => {
             userId: user.id,
             message: 'utilisateur trouvé',
             token: jwt.sign(
-              { userId: user._id },
+              { userId: user.id },
               'RANDOM_TOKEN_SECRET',
               { expiresIn: '24h' }),
           });
