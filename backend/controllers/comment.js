@@ -14,11 +14,12 @@ exports.getAllComments = (req, res) => {
 
 // Create a comment
 exports.createComment = (req, res, next) => {
-    const CommentObject = req.body;
-    // const userName = req.body.userName
-     const postId = req.params.postId
+    const CommentObject = req.body
+    console.log(req.params)
+    console.log(req.params.postId)
+    const postId = req.params.postId
     const comment = new Comment({
-        ...CommentObject, 
+        ...CommentObject,  
         postId: postId
     });
     comment.save()

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from 'react'
 import AddCommentModal from '../components/AddCommentModal'
 import DataContext from '../DataContext'
 import Axios from "axios";
+import { FaTrashAlt } from 'react-icons/fa';
 
 export default function CommentSection({postId}) {
 
@@ -29,29 +30,48 @@ export default function CommentSection({postId}) {
         // [LStoken]
     )
 
-    useEffect(() => {
-        fetchComments();
-    }, [ ]);
+  
 
 
     const submitComment = useCallback(() => {
         console.log(LStoken)
+        const userId = dataUser.id
         Axios.post(`http://localhost:3001/api/comment/${postId}`,
-            //  {headers: {
+            //   {headers: {
             //       Authorization: LStoken
-            //  }},
+            //   }},
             {
                 content: comment,
-                
+                userId: userId
             })
         setIsOpenCommentModal(!isOpenCommentModal)
         setComments([...comments, { comment: comment }])
-    }, [comment])
+    }, [comment, postId])
+
+
+    // const deleteComment = (id) => {
+    //     console.log(userId)
+    //     console.log(dataUser.id)
+    //     Axios.delete(`http://localhost:3001/api/post/${id}`,
+    //         {
+    //             headers: {
+    //                 Authorization: LStoken
+    //             }
+    //         }
+    //     )
+    //     const newComments = posts.filter((post) => post.id !== id);
+    //     setPosts(newComments)
+    // }
+
+    useEffect(() => {
+        fetchComments();
+        
+    }, []);
 
 
     return (
         <div>
-            <p>{postId}</p>
+            <p>{postId} + comment section</p>
             <button className="add-comment-btn" onClick={() => setIsOpenCommentModal(true)}>Add a comment</button>
 
             <AddCommentModal open={isOpenCommentModal} onClose={() => setIsOpenCommentModal(false)}>
@@ -59,7 +79,7 @@ export default function CommentSection({postId}) {
                     onChange={(e) => {
                         setComment(e.target.value)
                     }}></textarea>
-                <button className="submit-btn" onClick={submitComment} >SUBMIT</button>
+                <button className="submit-btn" onClick={submitComment}>SUBMIT</button>
             </AddCommentModal>
 
 
@@ -68,6 +88,7 @@ export default function CommentSection({postId}) {
                     return (
                         <div className="comment-single">
                             <p>{comment.content}</p>
+                            <FaTrashAlt />
                         </div>
                     )
                 })}

@@ -14,7 +14,7 @@ router.get('/ofpost/:id', commentCtrl.getCommentsForOnePost)
 router.delete('/ofpost/:id', commentCtrl.deleteCommentsForOnePost)
 
 // POST //
-router.post('/', commentCtrl.createComment)
+router.post('/:postId', commentCtrl.createComment)
 // router.post('/', auth, multer, commentCtrl.createComment)
 
 // DELETE //
