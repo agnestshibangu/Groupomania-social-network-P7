@@ -10,6 +10,8 @@ router.get('/', commentCtrl.getAllComments)
 // GET Comment post // 
 router.get('/ofpost/:id', commentCtrl.getCommentsForOnePost)
 
+// DELETE Comment post // 
+router.delete('/ofpost/:id', commentCtrl.deleteCommentsForOnePost)
 
 // POST //
 router.post('/', commentCtrl.createComment)

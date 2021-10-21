@@ -47,7 +47,18 @@ exports.getCommentsForOnePost = (req, res, next) => {
         .then(
             function(comment) { res.status(200).json(comment) },
             function(error) { res.status(404).json({ error }) }
-        );
-             
+        );  
 };
+
+// Delete all comments for one post
+exports.deleteCommentsForOnePost = (req, res, next) => {      
+    Comment.findAll({
+        where: { postId: req.params.id },
+        })
+        .then(Comment.destroy({ postId: req.params.id }))
+        .then(() => res.status(200).json({ message: ' tout les commentaires de ce post ont été supprimés !' }))
+        .catch(error => res.status(400).json({ error }));
+     
+};
+
 
