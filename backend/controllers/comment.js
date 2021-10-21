@@ -27,18 +27,21 @@ exports.createComment = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
+
 // Delete a post 
-exports.deleteComment = (req, res) => {
+exports.deleteComment  = (req, res) => {
     Comment.findOne({
         where: { id: req.params.id
                  }
     })
-        .then(Post => {
-            Post.destroy({ id: req.params.id })
+        .then( Comment => {
+            Comment.destroy({ id: req.params.id })
         })
-        .then(() => res.status(200).json({ message: 'comment deleted !' }))
+        .then(() => res.status(200).json({ message: ' Comment supprimé !' }))
         .catch(error => res.status(400).json({ error }));
 }
+
+
 
 // Get All comments for one post
 exports.getCommentsForOnePost = (req, res, next) => {      

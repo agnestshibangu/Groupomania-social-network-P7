@@ -30,16 +30,14 @@ export default function CommentSection({postId}) {
         // [LStoken]
     )
 
-  
-
-
     const submitComment = useCallback(() => {
         console.log(LStoken)
         const userId = dataUser.id
+        console.log(postId)
         Axios.post(`http://localhost:3001/api/comment/${postId}`,
             //   {headers: {
             //       Authorization: LStoken
-            //   }},
+            //    }},
             {
                 content: comment,
                 userId: userId
@@ -49,19 +47,18 @@ export default function CommentSection({postId}) {
     }, [comment, postId])
 
 
-    // const deleteComment = (id) => {
-    //     console.log(userId)
-    //     console.log(dataUser.id)
-    //     Axios.delete(`http://localhost:3001/api/post/${id}`,
-    //         {
-    //             headers: {
-    //                 Authorization: LStoken
-    //             }
-    //         }
-    //     )
-    //     const newComments = posts.filter((post) => post.id !== id);
-    //     setPosts(newComments)
-    // }
+    const deleteComment = (id) => {
+        console.log(id)
+        Axios.delete(`http://localhost:3001/api/comment/${id}`,
+            // {
+            //     headers: {
+            //         Authorization: LStoken
+            //     }
+            // }
+        )
+        const newComments = comments.filter((comment) => comment.id !== id);
+        setComments(newComments)
+    }
 
     useEffect(() => {
         fetchComments();
@@ -88,7 +85,7 @@ export default function CommentSection({postId}) {
                     return (
                         <div className="comment-single">
                             <p>{comment.content}</p>
-                            <FaTrashAlt />
+                            <FaTrashAlt onClick={() => deleteComment(comment.id)} />
                         </div>
                     )
                 })}
