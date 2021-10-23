@@ -50,13 +50,6 @@ export default function Profile() {
     return (
         <div className="main-container">
             <div className="profile-container">
-                <div className='image-container'>
-                    <img src={dataUser.profileImgUrl} alt='' />
-
-                </div>
-
-                <div className="vertical-bar" />
-
                 <div className="info-container">
                     <div className="info">
                         <div>{dataUser.id}</div>

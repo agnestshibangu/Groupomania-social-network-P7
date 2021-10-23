@@ -8,7 +8,7 @@ import Modal from '../components/Modal'
 import CommentSection from '../components/CommentSection';
 import DataContext from '../DataContext'
 import { useHistory } from "react-router-dom";
-import DelModButtons from '../components/DelModButtons';
+
 
 
 
@@ -22,7 +22,7 @@ export default function Forum() {
     const [posts, setPosts] = useState([])
     const [imageUrl, setImageUrl] = useState('')
     const [fakePath, setFakePath] = useState('')
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(true)
     const [isOpenModal, setIsOpenModal] = useState(false)
     // const [isToggledDelMod, setisToggledDelMod] = useState(false)
     
@@ -30,10 +30,9 @@ export default function Forum() {
 
     //  const LStoken = localStorage.getItem('token')
 
-    function toggle() {
-        setIsOpen(!isOpen)
-
-    }
+    // function toggle() {
+    //     setIsOpen(!isOpen)
+    // }
 
     // redirection if user is not logged //
     function redirectLogin() {
@@ -63,9 +62,6 @@ export default function Forum() {
     }, [LStoken, posts])
 
     ///////////////////////////////////
-
-  
-
 
 
     const submitPost = useCallback(() => {
@@ -150,7 +146,7 @@ export default function Forum() {
                         <div className="card-title-box">
                             <h2>{post.title} </h2>
                             <p>post créé par {post.userName}</p>
-                            <FaEllipsisV onClick={toggle} className="three-dots" />
+                            {/* <FaEllipsisV onClick={toggle} className="three-dots" /> */}
                         </div>
 
                         <div className="card-body">
@@ -172,7 +168,6 @@ export default function Forum() {
                         </div>
 
                         <p>{post.content} </p>
-                        <p> id du post : {post.id}</p>
 
                         <DropdownDelMod open={isOpen} postId={post.id} >
 

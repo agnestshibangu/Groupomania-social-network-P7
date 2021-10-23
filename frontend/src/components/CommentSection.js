@@ -3,6 +3,8 @@ import AddCommentModal from '../components/AddCommentModal'
 import DataContext from '../DataContext'
 import Axios from "axios";
 import { FaTrashAlt } from 'react-icons/fa';
+import '../style/Comment.css'
+
 
 export default function CommentSection({postId}) {
 
@@ -10,7 +12,7 @@ export default function CommentSection({postId}) {
     const [comments, setComments] = useState([])
     const [isOpenCommentModal, setIsOpenCommentModal] = useState(false)
     const [comment, setComment] = useState('')
-    // console.log(postId)
+    const userId = dataUser.id
 
 
     const fetchComments = useCallback(() => {
@@ -68,7 +70,7 @@ export default function CommentSection({postId}) {
 
     return (
         <div>
-            <p>{postId} + comment section</p>
+            <div className="horizontal-bar"></div>
             <button className="add-comment-btn" onClick={() => setIsOpenCommentModal(true)}>Add a comment</button>
 
             <AddCommentModal open={isOpenCommentModal} onClose={() => setIsOpenCommentModal(false)}>
@@ -84,8 +86,18 @@ export default function CommentSection({postId}) {
                 {comments.map((comment) => {
                     return (
                         <div className="comment-single">
-                            <p>{comment.content}</p>
-                            <FaTrashAlt onClick={() => deleteComment(comment.id)} />
+                            <p className="comment-text">{comment.content}</p>
+
+                        { comment.userId == userId ? 
+
+                         <FaTrashAlt className="delete-comment-btn" onClick={() => deleteComment(comment.id)} />
+
+                         : null 
+                        
+                        }
+
+
+                           
                         </div>
                     )
                 })}

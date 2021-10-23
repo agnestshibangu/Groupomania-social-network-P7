@@ -38,11 +38,11 @@ function Header() {
     </div>
     {  show? <div className="square">
 
-    <Link className="header-link" to="/">Accueil</Link>
-      <Link className="header-link" to="/profile"> Profile</Link>
-      <Link className="header-link" to="/forum"> forum</Link>
-      <Link className="header-link" to="/login"> login</Link>
-      <Link className="header-link" to="/signup"> signup</Link>
+    <Link className="header-link" onClick={displayLinks} to="/">Accueil</Link>
+      <Link className="header-link" onClick={displayLinks} to="/profile"> Profile</Link>
+      <Link className="header-link" onClick={displayLinks} to="/forum"> forum</Link>
+      <Link className="header-link" onClick={displayLinks} to="/login"> login</Link>
+      <Link className="header-link" onClick={displayLinks} to="/signup"> signup</Link>
       <button className="logout-btn" onClick={logout}>Logout</button>
 
     </div>: null}

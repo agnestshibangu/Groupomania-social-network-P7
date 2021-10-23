@@ -53,3 +53,18 @@
     font-size: 25px;
     color:rgb(253, 91, 91)
 }
+
+@media (max-width: 425px) {
+
+.square {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+
+
+
+
+
+}

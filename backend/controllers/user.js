@@ -53,14 +53,14 @@ exports.getLastSignup = (req, res) => {
 // signup
 exports.signup = async (req, res, next) => {
   console.log(req.body)
-  console.log(req.moderator)
+  console.log(req.body.moderator)
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
         name: req.body.name,
         email: req.body.email,
         password: hash, 
-        profileImgUrl: req.body.profileImgUrl
+        moderator: req.body.moderator
       });
       user.save()
         .then(() => res.status(201).json({ message: user }))
