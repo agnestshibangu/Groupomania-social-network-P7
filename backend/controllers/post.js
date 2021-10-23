@@ -40,6 +40,7 @@ exports.createPost = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
+
 // Delete a post 
 exports.deletePost = (req, res) => {
     Post.findOne({

@@ -8,6 +8,7 @@ import Modal from '../components/Modal'
 import CommentSection from '../components/CommentSection';
 import DataContext from '../DataContext'
 import { useHistory } from "react-router-dom";
+import DelModButtons from '../components/DelModButtons';
 
 
 
@@ -23,7 +24,9 @@ export default function Forum() {
     const [fakePath, setFakePath] = useState('')
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenModal, setIsOpenModal] = useState(false)
-
+    // const [isToggledDelMod, setisToggledDelMod] = useState(false)
+    
+    const userId = dataUser.id
 
     //  const LStoken = localStorage.getItem('token')
 
@@ -31,7 +34,6 @@ export default function Forum() {
         setIsOpen(!isOpen)
 
     }
-
 
     // redirection if user is not logged //
     function redirectLogin() {
@@ -55,12 +57,17 @@ export default function Forum() {
             })
             .then((response) => {
                 setPosts(response.data)
-
             })
-    }, [LStoken])
+
+            
+    }, [LStoken, posts])
+
+    ///////////////////////////////////
+
+  
 
 
-    const userId = dataUser.id
+
     const submitPost = useCallback(() => {
 
         // correct fakepath error
@@ -93,12 +100,11 @@ export default function Forum() {
 
     useEffect(() => {
         fetchPosts();
+
     }, []);
 
 
     const deletePost = (id, userId) => {
-        console.log(userId)
-        console.log(dataUser.id)
         Axios.delete(`http://localhost:3001/api/post/${id}`,
             {
                 headers: {
@@ -135,14 +141,15 @@ export default function Forum() {
             </Modal>
 
 
-            {posts.map((post) => {
-                console.log(post.imageUrl)
+            {posts.map((post, ofUser) => {
+
+                
 
                 return (
-                    <div className="forum-card">
+                    <div key={post.id} className="forum-card">
                         <div className="card-title-box">
                             <h2>{post.title} </h2>
-                            <p>post créé par</p>
+                            <p>post créé par {post.userName}</p>
                             <FaEllipsisV onClick={toggle} className="three-dots" />
                         </div>
 
@@ -150,8 +157,16 @@ export default function Forum() {
 
                             <img className="post-img" src={`http://localhost/images/${post.imageUrl}`} alt='' />
                             <div className="container-buttons">
-                                <button className="delete-btn" onClick={() => { deletePost(post.id, post.userId) }} >DELETE</button>
-                                <button className="modify-btn" >MODIFY</button>
+
+                                {post.userId == userId ?
+
+                                    <div>
+                                        <button className="delete-btn" onClick={() => { deletePost(post.id, post.userId) }} >DELETE</button>
+                                        <button className="modify-btn" >MODIFY</button>
+                                    </div>
+
+                                    : null}
+
                             </div>
 
                         </div>
@@ -159,23 +174,18 @@ export default function Forum() {
                         <p>{post.content} </p>
                         <p> id du post : {post.id}</p>
 
-
-
                         <DropdownDelMod open={isOpen} postId={post.id} >
-
 
                             <div className="container-DropdownDelMod">
 
-
                                 <div className="container-comments">
 
-
                                     <CommentSection postId={post.id} />
-
 
                                 </div>
 
                             </div>
+
                         </DropdownDelMod>
                     </div>
                 )

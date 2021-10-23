@@ -11,12 +11,12 @@ export default function Home() {
     const [latestPosts, setLatestPosts] = useState([])
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/post/lastactivitypost')
-        // ,
-        // {headers: {
-        //     Authorization: LStoken
-        //   }
-        // }
+        Axios.get('http://localhost:3001/api/post/lastactivitypost'
+        ,
+        {headers: {
+            Authorization: LStoken
+          }
+        })
         .then((response) => {
                 setLatestPosts(response.data)
                 console.log(response.data)

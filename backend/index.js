@@ -28,6 +28,8 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
 // built-in middleware function in Express. it parses incoming requests with JSON payloads and is based on body-parser
 // payload = les données qu'on veut encoder
 app.use(express.json())

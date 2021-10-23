@@ -33,7 +33,6 @@ function Header() {
   <div>
     <div className="header-container">
 
-     
       <button className="toggle-nav-btn" onClick={displayLinks}><FaBars /></button>
       
     </div>
