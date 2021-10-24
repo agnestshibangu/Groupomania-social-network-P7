@@ -45,13 +45,10 @@ exports.createPost = (req, res, next) => {
 // Delete a post 
 exports.deletePost = (req, res) => {
     Post.findOne({
-        where: {
-            id: req.params.id
-        }
+        where: { id: req.params.id }
     })
-
-        .then(Post => {
-            Post.destroy({ id: req.params.id })
+        .then(post => {
+            post.destroy({ id: req.params.id })
         })
 
         .then(() => res.status(200).json({ message: 'post supprimé !' }))

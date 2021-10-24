@@ -43,7 +43,7 @@ export default function Signup() {
 
     return (
         <div className="form-container">
-            <h1>Sign up to Groupomania</h1>
+            <h1 className="main-title">Sign up to Groupomania</h1>
 
             <div className="form-container-box">
 

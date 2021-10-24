@@ -10,7 +10,7 @@
     border: solid white 5px;
     box-shadow: 10px 0px 20px white;
     flex-direction: row;
-    justify-content: space-bet;
+    background-color: #ffffff78;
   }
   
   .image-container {
@@ -32,7 +32,7 @@
   
   .info-container {
   margin: 0 3%;
-      width: 65%;
+  width: 95%;
   
   }
   
@@ -108,13 +108,13 @@
 }     
 
 .card-status {
-    width: 31%;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    margin-top: 5px;
+  width: 40%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
 .admin {
@@ -123,4 +123,33 @@
 
 .user {
   background-color: rgb(91, 253, 126);
+}
+
+.profile-line {
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+@media (max-width: 425px) { 
+
+  .main-container {
+    margin: 0 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-line {
+  margin-bottom: 15px;
+}
+
+.delete-account-button {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.profile-container {
+  background-color: white;
+}
+
+
 }

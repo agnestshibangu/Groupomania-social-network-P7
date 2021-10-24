@@ -20,7 +20,7 @@ router.post('/', auth, multer, postCtrl.createPost)
 // router.post('/', auth, multer, postCtrl.createPost)
 
 // DELETE //
-router.delete('/:id', auth, postCtrl.deletePost)
+router.delete('/:id', auth, commentCtrl.deleteAllComments, postCtrl.deletePost)
 //router.delete('/:id', auth, commentCtrl.deleteAllComments, postCtrl.deletePost)
 
 // UPDATE //

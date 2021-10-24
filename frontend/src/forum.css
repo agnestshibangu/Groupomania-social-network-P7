@@ -75,6 +75,10 @@
     display: none;
 }
 
+.created-by-tag-smartphone {
+    display: none;
+}
+
 .btn {
     margin-top: 50px;
     display: flex;
@@ -170,4 +174,35 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+
+@media (max-width: 768px) {
+
+    .created-by-tag-laptop {
+        display: none;
+    }
+    
+    .created-by-tag-smartphone {
+        display: block;
+    }
+}
+
+
+
+@media (max-width: 425px) { 
+
+.forum-container {
+    width: 90%;
+    margin: 50px auto;
+}
+
+.upload {
+    margin: 0 auto;
+}
+
+.add-comment-btn {
+    margin: 10px auto;
+}
+
 }

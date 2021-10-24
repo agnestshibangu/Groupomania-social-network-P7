@@ -1,4 +1,3 @@
-
 import '../style/home.css'
 import React, { useState, useEffect, useContext } from 'react';
 import Axios from "axios";
@@ -29,13 +28,15 @@ export default function Home() {
     // const date = str.split("T",9)[0]
     // console.log(date)
     // ////
+
+    
     
 
     return (
         <div>
             <div className="home-container">
-          
-                <h2>Dernières activités</h2>
+                <h2>Bienvenue {dataUser.name} ! </h2>
+                
                 <div className="wrap-container">
                     <div className="last-activities-container">
                         <h3>Dernière activités sur le forum multimédia</h3>

@@ -50,7 +50,7 @@ export default function Login() {
     return (
 
         <div className="form-container">
-            <h1>Sign in to Groupomania</h1>
+            <h1 className="main-title">Sign in to Groupomania</h1>
            
             <div className="form-container-box">
             

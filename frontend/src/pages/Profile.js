@@ -52,9 +52,9 @@ export default function Profile() {
             <div className="profile-container">
                 <div className="info-container">
                     <div className="info">
-                        
-                        <p>email: {dataUser.email}</p>
-                        <p>inscrit depuis: {dataUser.createdAt}</p>
+                        <p className="profile-line">name: {dataUser.name}</p>
+                        <p className="profile-line">email: {dataUser.email}</p>
+                        <p className="profile-line">inscrit depuis: {dataUser.createdAt}</p>
 
                         {  dataUser.moderator == true ? 
 

@@ -41,20 +41,15 @@ exports.deleteComment  = (req, res) => {
         .catch(error => res.status(400).json({ error }));
 }
 
-///// Cette fonction ne marche pas !!!!
 // Delete all comments for a post
-exports.deleteAllComments = (req, res) => {
-Comment.findAll({
-    where: { postId: req.params.id
-    }
-    })
-    .then(Comment => {
-        Comment.destroy({ postId: req.params.id })
-        })   
+exports.deleteAllComments = (req, res, next) => {
+        Comment.destroy({ where: 
+            { postId : req.params.id } 
+        }) 
     .then(() => res.status(200).json({ message: ' tout les commentaire pour ce post on été supprimé !' }))
     .catch(error => res.status(400).json({ error }));
+    next();
 }
-
 
 
 // Get All comments for one post

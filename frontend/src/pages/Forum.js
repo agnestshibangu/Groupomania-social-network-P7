@@ -95,11 +95,12 @@ export default function Forum() {
         )
         setIsOpenModal(!isOpenModal)
         setPosts([...posts, { title: title, content: content, image: imageUrl }])
+        // window.location.reload(false)
     }, [content, title, fakePath, userId, posts, LStoken, isOpenModal])
 
     useEffect(() => {
         fetchPosts();
-
+       
     }, []);
 
 
@@ -148,10 +149,10 @@ export default function Forum() {
                     <div key={post.id} className="forum-card">
                         <div className="card-title-box">
                             <h2>{post.title} </h2>
-                            <p>post créé par {post.userName}</p>
+                            <p className="created-by-tag-laptop">post créé par {post.userName}</p>
                             {/* <FaEllipsisV onClick={toggle} className="three-dots" /> */}
                         </div>
-
+                        <p className="created-by-tag-smartphone">post créé par {post.userName}</p>
                         <div className="card-body">
 
                             <img className="post-img" src={`http://localhost/images/${post.imageUrl}`} alt='' />
