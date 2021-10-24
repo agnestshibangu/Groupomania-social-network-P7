@@ -29,8 +29,9 @@ export default function Login() {
         }).then((response) => {
             localStorage.setItem("token", "Bearer " + response.data.token)
             console.log(response.data.userId)
-
-            localStorage.setItem("id", response.data.userId )
+            console.log(response.data.moderator)
+            localStorage.setItem("id", response.data.userId)
+            localStorage.setItem("moderator", response.data.moderator)
             redirect()
         })
     }

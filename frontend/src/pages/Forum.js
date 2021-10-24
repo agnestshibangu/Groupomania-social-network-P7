@@ -27,6 +27,9 @@ export default function Forum() {
     // const [isToggledDelMod, setisToggledDelMod] = useState(false)
     
     const userId = dataUser.id
+    const moderator = dataUser.moderator 
+    console.log(userId)
+    console.log(moderator)
 
     //  const LStoken = localStorage.getItem('token')
 
@@ -154,11 +157,11 @@ export default function Forum() {
                             <img className="post-img" src={`http://localhost/images/${post.imageUrl}`} alt='' />
                             <div className="container-buttons">
 
-                                {post.userId == userId ?
+                                {post.userId == userId || dataUser.moderator == true ?
 
                                     <div>
                                         <button className="delete-btn" onClick={() => { deletePost(post.id, post.userId) }} >DELETE</button>
-                                        <button className="modify-btn" >MODIFY</button>
+                                        <button className="modify-btn">MODIFY</button>
                                     </div>
 
                                     : null}

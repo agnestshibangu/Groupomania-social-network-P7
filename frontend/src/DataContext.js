@@ -8,6 +8,7 @@ export const DataProvider = ({ children }) => {
  const [dataUser, setDataUser] = useState([])
  const LStoken = localStorage.getItem('token')
  const userId = localStorage.getItem('id')
+// const isModeraror = localStorage.getItem('moderator')
 
 
 useEffect(() => {

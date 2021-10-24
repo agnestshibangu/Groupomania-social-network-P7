@@ -108,10 +108,12 @@ exports.login = (req, res, next) => {
             });
           }
           res.status(200).json({
+            moderator: user.moderator,
             userId: user.id,
             message: 'utilisateur trouvé',
             token: jwt.sign(
-              { userId: user.id },
+              { userId: user.id,
+                moderator: user.moderator },
               'RANDOM_TOKEN_SECRET',
               { expiresIn: '24h' }),
           });

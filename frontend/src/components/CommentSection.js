@@ -88,7 +88,7 @@ export default function CommentSection({postId}) {
                         <div className="comment-single">
                             <p className="comment-text">{comment.content}</p>
 
-                        { comment.userId == userId ? 
+                        { comment.userId == userId || dataUser.moderator == true ? 
 
                          <FaTrashAlt className="delete-comment-btn" onClick={() => deleteComment(comment.id)} />
 
