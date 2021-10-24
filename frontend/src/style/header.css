@@ -51,7 +51,23 @@
     background: none;
     border: none;
     font-size: 25px;
-    color:rgb(253, 91, 91)
+    color:rgb(253, 91, 91); 
+    margin: auto;
+    
+}
+
+.moderator-red-square {
+    position: absolute;
+    top: 0px;
+    left: 35px;
+    width: 25%;
+    background-color: rgb(253, 91, 91);
+    padding: 1%;
+    border-radius: 0 0 40px 40px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 425px) {
@@ -60,11 +76,6 @@
     width: 100%;
     max-width: 100%;
 }
-
-
-
-
-
 
 
 }

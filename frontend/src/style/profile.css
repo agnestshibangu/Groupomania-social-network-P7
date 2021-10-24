@@ -107,3 +107,20 @@
   align-items: center;
 }     
 
+.card-status {
+    width: 31%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.admin {
+  background-color: rgb(253, 91, 91);
+}
+
+.user {
+  background-color: rgb(91, 253, 126);
+}

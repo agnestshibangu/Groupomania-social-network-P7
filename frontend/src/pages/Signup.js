@@ -19,10 +19,11 @@ export default function Signup() {
         history.push("/login")
     }
 
-
-    const signup = () => {
+    const emailReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
 
     
+
+    const signup = () => {
         Axios.post('http://localhost:3001/api/user/signup', {
             name: name,
             email: email,
@@ -33,6 +34,12 @@ export default function Signup() {
         })
     }
 
+    function emailValidation(email) {
+        if (!email.match(emailReg)) {
+            alert("error : email must be valid !")
+          }
+        signup();
+    }
 
     return (
         <div className="form-container">
@@ -71,7 +78,7 @@ export default function Signup() {
                 </div>
 
                 <div className="button-login-container">
-                    <button className="submit-btn-login" onClick={signup}>SUBMIT</button>
+                    <button className="submit-btn-login" onClick={() => signup, () => emailValidation(email)}>SUBMIT</button>
                 </div>
 
 

@@ -28,7 +28,7 @@ exports.createComment = (req, res, next) => {
 };
 
 
-// Delete a post 
+// Delete a comment 
 exports.deleteComment  = (req, res) => {
     Comment.findOne({
         where: { id: req.params.id
@@ -39,6 +39,20 @@ exports.deleteComment  = (req, res) => {
         })
         .then(() => res.status(200).json({ message: ' Comment supprimé !' }))
         .catch(error => res.status(400).json({ error }));
+}
+
+///// Cette fonction ne marche pas !!!!
+// Delete all comments for a post
+exports.deleteAllComments = (req, res) => {
+Comment.findAll({
+    where: { postId: req.params.id
+    }
+    })
+    .then(Comment => {
+        Comment.destroy({ postId: req.params.id })
+        })   
+    .then(() => res.status(200).json({ message: ' tout les commentaire pour ce post on été supprimé !' }))
+    .catch(error => res.status(400).json({ error }));
 }
 
 

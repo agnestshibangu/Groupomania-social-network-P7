@@ -27,9 +27,10 @@ ReactDOM.render(
 
   
   <Router>
-   <Header /> 
+    
     <Switch>
       <DataProvider>
+        <Header />
         <Route exact path="/">
           <Home />
         </Route>

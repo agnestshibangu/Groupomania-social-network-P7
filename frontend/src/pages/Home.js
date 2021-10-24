@@ -34,8 +34,7 @@ export default function Home() {
     return (
         <div>
             <div className="home-container">
-
-
+          
                 <h2>Dernières activités</h2>
                 <div className="wrap-container">
                     <div className="last-activities-container">

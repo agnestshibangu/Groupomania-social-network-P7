@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
     // console.log(userId)
     const moderator = decodedToken.moderator
     console.log(moderator)
-    if (req.body.userId && req.body.userId !== userId || req.body.moderator == null ) {
+    if (req.body.userId && req.body.userId !== userId || req.body.moderator == false ) {
       throw 'Invalid user ID';
     } else {
       next();

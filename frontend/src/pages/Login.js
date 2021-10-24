@@ -12,15 +12,13 @@ export default function Login() {
     const { dataUser } = useContext(DataContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+ 
     
-
-
-
 
     function redirect() {
         history.push("/")
     }
-   
+
 
     const login = () => {
         Axios.post('http://localhost:3001/api/user/login', {
@@ -36,12 +34,21 @@ export default function Login() {
         })
     }
 
+    const emailReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
 
+    function emailValidation(email) {
+        if (!email.match(emailReg)) {
+            alert("error : email must be valid !")
+          }
+        login();
+    }
+    
 
     
    
 
     return (
+
         <div className="form-container">
             <h1>Sign in to Groupomania</h1>
            
@@ -57,6 +64,7 @@ export default function Login() {
                             setEmail(e.target.value)
                         }}></input>
                 </div>
+               
          
                 <div className="input">
                     <label for="name">password:</label>
@@ -71,7 +79,7 @@ export default function Login() {
             </div>
            
             <div className="button-login-container">
-                <button className="submit-btn-login" onClick={login}>SUBMIT</button>
+                <button className="submit-btn-login" onClick={() => login, () => emailValidation(email)}>SUBMIT</button>
             </div>
                 
             </div>      

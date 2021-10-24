@@ -52,10 +52,17 @@ export default function Profile() {
             <div className="profile-container">
                 <div className="info-container">
                     <div className="info">
-                        <div>{dataUser.id}</div>
+                        
                         <p>email: {dataUser.email}</p>
                         <p>inscrit depuis: {dataUser.createdAt}</p>
-                        <p>modérateur:</p>
+
+                        {  dataUser.moderator == true ? 
+
+                            <div className="card-status admin">ADMIN STATUS</div>
+                            :
+                            <div className="card-status user">USER STATUS</div>
+                        }
+                        
                     </div>
                 </div>
                

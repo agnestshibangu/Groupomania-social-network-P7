@@ -1,5 +1,5 @@
 const db = require('../models');
-const { Post } = db.sequelize.models;
+const { Post, Comment } = db.sequelize.models;
 const fs = require('fs')
 const jwt = require('jsonwebtoken');
 
@@ -13,10 +13,11 @@ exports.getAllPosts = (req, res) => {
 
 // Get last activity
 exports.getLastActivityPost = (req, res) => {
-    Post.findAll({
-        limit: 3,
-        order: [['createdAt', 'DESC']]
-    })
+    // Post.find({
+    //     order: [['createdAt', 'DESC']],
+    //     limit: 3
+    // })
+    Post.find({ limit: 3 })
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }));
 };
@@ -44,12 +45,15 @@ exports.createPost = (req, res, next) => {
 // Delete a post 
 exports.deletePost = (req, res) => {
     Post.findOne({
-        where: { id: req.params.id
-                 }
+        where: {
+            id: req.params.id
+        }
     })
+
         .then(Post => {
             Post.destroy({ id: req.params.id })
         })
+
         .then(() => res.status(200).json({ message: 'post supprimé !' }))
         .catch(error => res.status(400).json({ error }));
 }

@@ -31,12 +31,13 @@ function Header() {
   return (
 
   <div>
+    
     <div className="header-container">
-
+      
       <button className="toggle-nav-btn" onClick={displayLinks}><FaBars /></button>
       
     </div>
-    {  show? <div className="square">
+    {  show ? <div className="square">
 
     <Link className="header-link" onClick={displayLinks} to="/">Accueil</Link>
       <Link className="header-link" onClick={displayLinks} to="/profile"> Profile</Link>
