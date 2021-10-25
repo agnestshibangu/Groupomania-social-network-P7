@@ -13,11 +13,10 @@ exports.getAllPosts = (req, res) => {
 
 // Get last activity
 exports.getLastActivityPost = (req, res) => {
-    // Post.find({
-    //     order: [['createdAt', 'DESC']],
-    //     limit: 3
-    // })
-    Post.find({ limit: 3 })
+    Post.findAll({
+        limit: 3,
+        order: [['createdAt', 'DESC']]
+    })
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }));
 };

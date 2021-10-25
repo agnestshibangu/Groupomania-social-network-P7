@@ -9,6 +9,5 @@
     width: 90%;
     height: fit-content;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    overflow-wrap: break-word;
 }

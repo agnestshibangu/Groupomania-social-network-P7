@@ -48,7 +48,9 @@ export default function Profile() {
 
 
     return (
+
         <div className="main-container">
+            <h1 className="hidden-h1">Profile</h1>
             <div className="profile-container">
                 <div className="info-container">
                     <div className="info">

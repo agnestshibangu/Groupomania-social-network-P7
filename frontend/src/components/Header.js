@@ -32,12 +32,12 @@ function Header() {
 
   <div>
     
-    <div className="header-container">
+    <header className="header-container">
       
       <button className="toggle-nav-btn" onClick={displayLinks}><FaBars /></button>
       
-    </div>
-    {  show ? <div className="square">
+    </header>
+    {  show ? <nav className="square">
 
     <Link className="header-link" onClick={displayLinks} to="/">Accueil</Link>
       <Link className="header-link" onClick={displayLinks} to="/profile"> Profile</Link>
@@ -46,7 +46,7 @@ function Header() {
       <Link className="header-link" onClick={displayLinks} to="/signup"> signup</Link>
       <button className="logout-btn" onClick={logout}>Logout</button>
 
-    </div>: null}
+    </nav> : null}
   </div>
   )
 }

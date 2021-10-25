@@ -119,6 +119,7 @@ export default function Forum() {
 
     return (
         <div className="forum-container">
+            <h1 className="hidden-h1">Forum</h1>
 
             <button className="btn upload" onClick={() => setIsOpenModal(true)}><FaPlus />Upload</button>
             <Modal open={isOpenModal} onClose={() => setIsOpenModal(false)}>

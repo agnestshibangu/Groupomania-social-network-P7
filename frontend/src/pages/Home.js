@@ -8,6 +8,8 @@ export default function Home() {
 
     const { dataUser, LStoken } = useContext(DataContext)
     const [latestPosts, setLatestPosts] = useState([])
+    const [hour, setHour] = useState([])
+    const [day, setDay] = useState([])
 
     useEffect(() => {
         Axios.get('http://localhost:3001/api/post/lastactivitypost'
@@ -18,28 +20,42 @@ export default function Home() {
         })
         .then((response) => {
                 setLatestPosts(response.data)
-                console.log(response.data)
-                
+                console.log(response.data.updatedAt)    
+                const data = response.data
+
+
+                function formateDate (data) {
+                // console.log(data)
+                     for (let i = 0; i < data.length; i++) {
+                       // const date = response.data[i].createdAt
+                        const str = data[i].createdAt.slice(0,10)
+                        const day = str.replaceAll('-', '/')
+                        setDay(day)
+                        const hour = data[i].createdAt.slice(11,19)
+                        setHour(hour)
+                    }
+                 }
+
+                formateDate(data)
+
             })
     }, [])
 
-    // // format date
-    // const str = document.getElementById('date').innerHTML
-    // const date = str.split("T",9)[0]
-    // console.log(date)
-    // ////
+
 
     
-    
+   
+
+
 
     return (
         <div>
             <div className="home-container">
-                <h2>Bienvenue {dataUser.name} ! </h2>
+                <h1>Bienvenue {dataUser.name} ! </h1>
                 
                 <div className="wrap-container">
                     <div className="last-activities-container">
-                        <h3>Dernière activités sur le forum multimédia</h3>
+                        <h2>Dernière activités sur le forum multimédia</h2>
                         <div className="underline"/>
 
                         <table className="table-last-activities">
@@ -54,7 +70,7 @@ export default function Home() {
                                     return (
                                         <tr>
                                             <td className="col-body">{post.title}</td>
-                                            <td className="col-body col-body2" id="date">{post.createdAt}</td>
+                                            <td className="col-body col-body2" id="date">le {day} à {hour}</td>
                                         </tr>
                                     )
                                 }

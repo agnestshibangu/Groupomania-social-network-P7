@@ -9,6 +9,10 @@
     justify-content: space-bet;
 }
 
+.hidden-h1 {
+    display: none;
+  }
+
 .card-title-box {
     display: flex;
     flex-direction: row;
@@ -157,7 +161,7 @@
 }
 
 .comment-section {
-    width: 100%;
+    width: 94%;
     height: auto; 
     background-color: white;
     display: flex;
@@ -165,15 +169,22 @@
     border-radius: 20px;
 }
 
+.comment-single:first-of-type {
+    margin-top: 15px
+  }
+
 .comment-single {
     width: 90%;
-    margin: 30px auto;
+    margin: 0 auto 13px auto;
     border-radius: 10px;
-    box-shadow: 0px 0px 5px rgb(185, 185, 185);
+    box-shadow: 0px 0px 5px rgb(185 185 185);
     padding: 1%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+}
+
+.delete-comment-btn {
+    margin-top: 6px;
 }
 
 

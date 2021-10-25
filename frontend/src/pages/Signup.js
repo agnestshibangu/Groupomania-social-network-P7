@@ -51,8 +51,8 @@ export default function Signup() {
                 <div className="inputs">
 
                     <div className="input">
-                        <label for="name">Name:</label>
-                        <input placeholder="name" type="text"
+                        <label for="inputName">Name:</label>
+                        <input placeholder="name" type="name" class="form-control" id="inputName" type="text"
                             onChange={(e) => {
                                 setName(e.target.value)
                             }}></input>
@@ -60,16 +60,16 @@ export default function Signup() {
 
 
                     <div className="input">
-                        <label for="name">Email:</label>
-                        <input placeholder="email" type="text"
+                        <label for="inputEmail">Email:</label>
+                        <input placeholder="email" type="email" class="form-control" id="inputEmail" type="text"
                             onChange={(e) => {
                                 setEmail(e.target.value)
                             }}></input>
                     </div>
 
                     <div className="input">
-                        <label for="name">password:</label>
-                        <input placeholder="password" type="password"
+                        <label for="inputPassword">password:</label>
+                        <input placeholder="password" type="password" class="form-control" id="inputPassword" type="text"
                             onChange={(e) => {
                                 setPassword(e.target.value)
                             }}></input>
