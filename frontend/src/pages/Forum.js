@@ -79,12 +79,21 @@ export default function Forum() {
         const userName = dataUser.name
         const userId = dataUser.id
         console.log(LStoken)
-        // 
+        
+        // const form =  {
+        //     
+        //         userId: userId,
+        //         userName: userName
+        //     }
+        
         const myformData = new FormData();
+        myformData.append("title", title)
+        myformData.append("content", content)
+        myformData.append("userId", userId)
+        myformData.append("userName", userName)
         myformData.append("file", file)
-        // console.log(imageUrl)
+        
 
-        //Axios.post("http://httpbin.org/anything", myformData,
         Axios.post("http://localhost:3001/api/post", myformData,
             {
                 headers: {
@@ -94,41 +103,6 @@ export default function Forum() {
             }
         )
         .then(res => console.log(res))
-      
-
-
-
-
-
-
-
-        // multipart form data
-        // const form =     {
-        //     title: title,
-        //     content: content,
-        //     imageUrl: imageUrl,
-        //     userId: userId,
-        //     userName: userName
-        // }
-        // const { files } =  imageUrl
-
-        // console.log(file)
-
-        // const fd = new FormData();
-        // // fd.append("form", form)
-        // fd.append('file', file, file.name)
-        // console.log(fd)
-
-        // Axios.post("http://httpbin.org/anything", fd,
-        //  //Axios.post('http://localhost:3001/api/post', fd,
-        //     {
-        //         headers: {
-        //             'Content-Type': `multipart/form-data; boundary=${fd._boundary}`,
-        //             'Authorization': LStoken
-        //         }
-        //     }
-        // )
-        // .then(res => console.log(res))
         setIsOpenModal(!isOpenModal)
         setPosts([...posts, { title: title, content: content, image: file }])
         // window.location.reload(false)
@@ -181,7 +155,7 @@ export default function Forum() {
 
 
             {posts.map((post, ofUser) => {
-            console.log(post)
+                console.log(post)
 
 
                 return (

@@ -24,7 +24,7 @@ exports.getLastActivityPost = (req, res) => {
 
 // Create a post
 exports.createPost = (req, res, next) => {
-    const postObject = req.body;
+    const postObject = req.body
     const userId = req.body.userId
     const userName = req.body.userName
     if (req.file) {
