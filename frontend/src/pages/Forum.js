@@ -8,6 +8,7 @@ import Modal from '../components/Modal'
 import CommentSection from '../components/CommentSection';
 import DataContext from '../DataContext'
 import { useHistory } from "react-router-dom";
+import FormData from 'form-data'
 
 
 
@@ -20,16 +21,17 @@ export default function Forum() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [posts, setPosts] = useState([])
-    const [imageUrl, setImageUrl] = useState('')
-    const [fakePath, setFakePath] = useState('')
+    //const [imageUrl, setImageUrl] = useState('')
+    //const [fakePath, setFakePath] = useState('')
     const [isOpen, setIsOpen] = useState(true)
     const [isOpenModal, setIsOpenModal] = useState(false)
+    ///
+    const [file, setFile] = useState('')
     // const [isToggledDelMod, setisToggledDelMod] = useState(false)
-    
+
     const userId = dataUser.id
-    const moderator = dataUser.moderator 
-    console.log(userId)
-    console.log(moderator)
+    const moderator = dataUser.moderator
+
 
     //  const LStoken = localStorage.getItem('token')
 
@@ -61,7 +63,7 @@ export default function Forum() {
                 setPosts(response.data)
             })
 
-            
+
     }, [LStoken, posts])
 
     ///////////////////////////////////
@@ -70,37 +72,71 @@ export default function Forum() {
     const submitPost = useCallback(() => {
 
         // correct fakepath error
-        let filename = fakePath.replace(/^.*\\/, "");
-        setImageUrl(filename)
-        const imageUrl = filename
+        // let filename = fakePath.replace(/^.*\\/, "");
+        // setImageUrl(filename)
+        // const imageUrl = filename
         //  
         const userName = dataUser.name
         const userId = dataUser.id
         console.log(LStoken)
-        Axios.post('http://localhost:3001/api/post',
-            {
-                title: title,
-                content: content,
-                imageUrl: imageUrl,
-                userId: userId,
-                userName: userName
-            },
+        // 
+        const myformData = new FormData();
+        myformData.append("file", file)
+        // console.log(imageUrl)
+
+        //Axios.post("http://httpbin.org/anything", myformData,
+        Axios.post("http://localhost:3001/api/post", myformData,
             {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': LStoken
                 }
             }
-
         )
+        .then(res => console.log(res))
+      
+
+
+
+
+
+
+
+        // multipart form data
+        // const form =     {
+        //     title: title,
+        //     content: content,
+        //     imageUrl: imageUrl,
+        //     userId: userId,
+        //     userName: userName
+        // }
+        // const { files } =  imageUrl
+
+        // console.log(file)
+
+        // const fd = new FormData();
+        // // fd.append("form", form)
+        // fd.append('file', file, file.name)
+        // console.log(fd)
+
+        // Axios.post("http://httpbin.org/anything", fd,
+        //  //Axios.post('http://localhost:3001/api/post', fd,
+        //     {
+        //         headers: {
+        //             'Content-Type': `multipart/form-data; boundary=${fd._boundary}`,
+        //             'Authorization': LStoken
+        //         }
+        //     }
+        // )
+        // .then(res => console.log(res))
         setIsOpenModal(!isOpenModal)
-        setPosts([...posts, { title: title, content: content, image: imageUrl }])
+        setPosts([...posts, { title: title, content: content, image: file }])
         // window.location.reload(false)
-    }, [content, title, fakePath, userId, posts, LStoken, isOpenModal])
+    }, [content, title, file, userId, posts, LStoken, isOpenModal])
 
     useEffect(() => {
         fetchPosts();
-       
+
     }, []);
 
 
@@ -123,9 +159,11 @@ export default function Forum() {
 
             <button className="btn upload" onClick={() => setIsOpenModal(true)}><FaPlus />Upload</button>
             <Modal open={isOpenModal} onClose={() => setIsOpenModal(false)}>
-                <input className="input-file" placeholder="file" name="file" type="file" accept="image/*"
+                <input className="input-file" placeholder="file" name="file" type="file" accept=".jpg"
                     onChange={(e) => {
-                        setFakePath(e.target.value)
+                        const file = e.target.files[0]
+                        setFile(file)
+                        //setFakePath(e.target.value)
                         // setFakePath(e.target.files[0])
                     }}
                 ></input>
@@ -143,8 +181,8 @@ export default function Forum() {
 
 
             {posts.map((post, ofUser) => {
+            console.log(post)
 
-                
 
                 return (
                     <div key={post.id} className="forum-card">
@@ -156,7 +194,7 @@ export default function Forum() {
                         <p className="created-by-tag-smartphone">post créé par {post.userName}</p>
                         <div className="card-body">
 
-                            <img className="post-img" src={`http://localhost/images/${post.imageUrl}`} alt='' />
+                            <img className="post-img" src={`${post.imageUrl}`} alt='' />
                             <div className="container-buttons">
 
                                 {post.userId == userId || dataUser.moderator == true ?

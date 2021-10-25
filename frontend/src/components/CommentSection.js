@@ -86,6 +86,7 @@ export default function CommentSection({postId}) {
                 {comments.map((comment) => {
                     return (
                         <div className="comment-single">
+                            <p>commentaire de {comment.userName}</p>
                             <p className="comment-text">{comment.content}</p>
 
                         { comment.userId == userId || dataUser.moderator == true ? 

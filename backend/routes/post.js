@@ -15,8 +15,8 @@ router.get('/:id', auth, postCtrl.getAllPosts)
 router.get('/lastactivitypost', auth, postCtrl.getLastActivityPost)
 
 // POST //
-router.post('/', auth, multer, postCtrl.createPost)
-// router.post('/', auth, multer, postCtrl.createPost)
+//router.post('/', postCtrl.createPost)
+ router.post('/', auth, multer, postCtrl.createPost)
 
 // DELETE //
 router.delete('/:id', auth, commentCtrl.deleteAllComments, postCtrl.deletePost)

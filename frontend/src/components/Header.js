@@ -37,8 +37,10 @@ function Header() {
       <button className="toggle-nav-btn" onClick={displayLinks}><FaBars /></button>
       
     </header>
-    {  show ? <nav className="square">
+       <nav className={show ? 'square active' : 'square'}>
 
+    
+  
     <Link className="header-link" onClick={displayLinks} to="/">Accueil</Link>
       <Link className="header-link" onClick={displayLinks} to="/profile"> Profile</Link>
       <Link className="header-link" onClick={displayLinks} to="/forum"> forum</Link>
@@ -46,7 +48,7 @@ function Header() {
       <Link className="header-link" onClick={displayLinks} to="/signup"> signup</Link>
       <button className="logout-btn" onClick={logout}>Logout</button>
 
-    </nav> : null}
+    </nav> 
   </div>
   )
 }

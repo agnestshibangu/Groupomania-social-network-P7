@@ -68,7 +68,7 @@ export default function Login() {
          
                 <div className="input">
                     <label for="inputPassword">password:</label>
-                    <input placeholder="password" type="password" class="form-control" id="inputPassword" type="text"
+                    <input placeholder="password" type="password" class="form-control" id="inputPassword" type="password"
                     onChange={(e) => {
                         setPassword(e.target.value)
                     }}></input>
