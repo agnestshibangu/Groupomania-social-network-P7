@@ -1,54 +1,40 @@
 # P7_01-10-21_Agnes_Tshibangu
 groupomania social network (React, express, Mysql, NodeJs)
 
-Create a corporate social network
-Setting up the development environment (IDE)
-Set up of Node
-Go to NodeJS.org to download and then install the latest version of Node.
+Pour ce projet, le but est de créer un réseau social interne pour les employés de l'entreprise Groupomania. Le but de cet outil est de faciliter les interactions entre collègues.
 
-Set up of Vue.js
-To install it, run the following command from your console: npm install vue
+Pour cela, j'ai développer une API à l'aide d'Express et Mysql. Pour le front-end, moi choix s'est porté sur le framework React. 
 
-Set up of MySQL
-Here is the process to install MySQL: https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7152681-installez-le-sgbd-mysql
+# How to install NodeJs
 
-Launching the app
-Clone the project:
+download and install the last version of Node.Js (you can add nodemon)
 
-git clone https://github.com/jerome-dubois/JeromeDubois_7_14082021.git
+# How to install React
 
-Backend
-MySQL
-Configure backend/config/config.json and make sure the username and password match your local MySQL credentials.
+1) open terminal
+2) Create a new project folder with ``` mkdir Groupomania ```
+3) then enter the directory ``` cd Groupomania ```
+4) install react with the following command : ``` npx create-react-app <name> ``` and than ``` cd <name> ``` 
+5) then run the Node server with the following command :  ``` npm start  ``` 
+6) use  ``` ctrl + c  ```  if you want to stop the React app in your command line
 
-Then, you can create database with:
+# Set up MySQL 
 
-cd backend
+1) install MySQL (I'm using Wamp/localhost - phpMyAdmin) 
+2) configure backend/config/config.json and make sure the username and password match your local MySQL credentials.
+3) 3) create the database with sequelize ``` npx sequelize-cli db:create ```
 
-npm install
+# Clone the project 
 
-npx sequelize-cli db:create
+1) open git bash 
+2) create or enter the directory where you want the cloned directory to be added 
+3) use the following command  : ``` git clone https://github.com/agnestshibangu/P7_01-10-21_Agnes_Tshibangu.git ```
 
-And then, you can create tables defined in migration files with the following command:
 
-npx sequelize-cli db:migrate
+# Run the App
 
-Launching
-Open a new terminal with the following successive orders:
+1) cd backend ``` nodemon server ```` 
+2) cd frontend : ``` npm start ```
 
-cd backend
 
-npm install
-
-node server
-
-Frontend
-Open a new terminal with the following successive orders:
-
-cd frontend
-
-npm install
-
-npm run serve
-
-Then open on: http://localhost:8080/#/register
+Then open on: http://localhost:3000/login
