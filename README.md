@@ -33,7 +33,7 @@ download and install the last version of Node.Js (you can add nodemon)
 
 # Run the App
 
-1) cd backend ``` nodemon server ```` 
+1) cd backend ``` nodemon server ``` 
 2) cd frontend : ``` npm start ```
 
 
