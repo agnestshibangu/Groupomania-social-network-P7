@@ -22,7 +22,7 @@ download and install the last version of Node.Js (you can add nodemon)
 
 1) install MySQL (I'm using Wamp/localhost - phpMyAdmin) 
 2) configure backend/config/config.json and make sure the username and password match your local MySQL credentials.
-3) 3) create the database with sequelize ``` npx sequelize-cli db:create ```
+3) create the database with sequelize ``` npx sequelize-cli db:create ```
 
 # Clone the project 
 
