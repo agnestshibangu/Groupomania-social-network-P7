@@ -1,10 +1,8 @@
 # P7_01-10-21_Agnes_Tshibangu
-groupomania social network (React, express, Mysql, NodeJs)
+--- groupomania social network (React, express, Mysql, NodeJs) ---
 
 The goal for this project was to create a social network for the company Groupomania to improve communication among its employees. 
-Using Express and NodeJs for the backend and React for the frontend, this API has a login and authentication system (JWT), displays the lastest activities and allow users to share their ideas thank to a forum where photos, posts and comments can be exchanged.
-
-Pour cela, j'ai développer une API à l'aide d'Express et Mysql. Pour le front-end, moi choix s'est porté sur le framework React. 
+Using Express and NodeJs for the backend and React for the frontend, this API has a login and authentication system (JWT), displays the lastest activities and allows users to share their ideas thank to a forum where photos, posts and comments can be exchanged.
 
 # How to install NodeJs
 
