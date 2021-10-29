@@ -17,8 +17,9 @@ function Header() {
   }
 
   function logout() {
-    localStorage.setItem('token', '')
-    localStorage.setItem('id', '')
+    // localStorage.setItem('token', '')
+    // localStorage.setItem('id', '')
+    localStorage.clear();
     redirect()
   }
 
@@ -34,7 +35,7 @@ function Header() {
     
     <header className="header-container">
       
-      <button className="toggle-nav-btn" onClick={displayLinks}><FaBars /></button>
+      <button className="toggle-nav-btn" onClick={displayLinks}><FaBars /><span className="text-nav-btn">menu-btn</span></button>
       
     </header>
        <nav className={show ? 'square active' : 'square'}>

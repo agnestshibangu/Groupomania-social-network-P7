@@ -52,8 +52,6 @@ exports.getLastSignup = (req, res) => {
 
 // signup
 exports.signup = async (req, res, next) => {
-  console.log(req.body)
-  console.log(req.body.moderator)
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
@@ -124,7 +122,6 @@ exports.login = (req, res, next) => {
 };
 
 
-// Get last new user
 
 
 

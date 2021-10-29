@@ -14,10 +14,9 @@ exports.getAllPosts = (req, res) => {
 // Get last activity
 exports.getLastActivityPost = (req, res) => {
     Post.findAll({
-        limit: 3,
-        order: [['createdAt', 'DESC']]
+        limit: 3
     })
-        .then(posts => res.status(200).json(posts))
+        .then(posts => res.status(201).json(posts))
         .catch(error => res.status(400).json({ error }));
 };
 
@@ -26,6 +25,7 @@ exports.getLastActivityPost = (req, res) => {
 exports.createPost = (req, res, next) => {
     const postObject = req.body
     const userId = req.body.userId
+    console.log(userId)
     const userName = req.body.userName
     if (req.file) {
         postObject.imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`

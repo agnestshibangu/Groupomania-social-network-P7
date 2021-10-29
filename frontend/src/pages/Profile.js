@@ -7,22 +7,23 @@ import { useHistory } from "react-router-dom";
 
 export default function Profile() {
 
-    const history = useHistory(); 
+    const history = useHistory();
 
     const [isOpenDeleteAccModal, setIsOpenDeleteAccModal] = useState(false)
     const [isprofileDeleted, setisprofileDeleted] = useState(false)
 
     const { dataUser, LStoken } = useContext(DataContext)
 
-     // redirection if user is not logged //
-     function redirectLogin() {
+    // redirection if user is not logged //
+
+    function redirectLogin() {
         history.push("/login")
     }
 
     useEffect(() => {
-       if (!LStoken) {
-        redirectLogin()
-       }
+        if (!LStoken) {
+            redirectLogin()
+        }
     }, [])
 
     /////////////////////////////////////
@@ -30,19 +31,19 @@ export default function Profile() {
 
     function deleteAccount(id) {
         Axios.delete(`http://localhost:3001/api/user/delete/${dataUser.id}`)
-        .then((response) => {
-            console.log(response + 'utilsateur supprimé')
-            setisprofileDeleted(true)
-            localStorage.setItem('token', '')
-            localStorage.setItem('id','')
-        })
+            .then((response) => {
+                console.log(response + 'utilsateur supprimé')
+                setisprofileDeleted(true)
+                localStorage.setItem('token', '')
+                localStorage.setItem('id', '')
+            })
     }
 
     if (isprofileDeleted) {
         return (
             <div className="main-container">
                 <div className="delete-profile-msg">Profile supprimé</div>
-            </div>  
+            </div>
         )
     }
 
@@ -51,32 +52,56 @@ export default function Profile() {
 
         <div className="main-container">
             <h1 className="hidden-h1">Profile</h1>
-            <div className="profile-container">
-                <div className="info-container">
-                    <div className="info">
-                        <p className="profile-line">name: {dataUser.name}</p>
-                        <p className="profile-line">email: {dataUser.email}</p>
-                        <p className="profile-line">inscrit depuis: {dataUser.createdAt}</p>
 
-                        {  dataUser.moderator == true ? 
 
-                            <div className="card-status admin">ADMIN STATUS</div>
-                            :
-                            <div className="card-status user">USER STATUS</div>
-                        }
-                        
-                    </div>
+
+            <div className="info-container">
+                <div className="info">
+                    <h2>Informations sur le profile</h2>
+                    <div className="underline" />
+                    <table>
+                        <thead className="thead">
+                            <tr>
+                                <th className="column title" colspan="1">champs</th>
+                                <th className="column date" colspan="1">infos utilisateur</th>
+                            </tr>
+                        </thead>
+
+                        <tr>
+                            <td> <p className="profile-info-input">nom d'utilisateur</p> </td>
+                            <td> <p className="profile-line-data"> {dataUser.name}</p> </td>
+                        </tr>
+
+                        <tr>
+                            <td> <p className="profile-info-input">email</p> </td>
+                            <td> <p className="profile-line-data">{dataUser.email}</p> </td>
+                        </tr>
+
+                        <tr>
+                            <td> <p className="profile-info-input">créé le</p> </td>
+                            <td> <p className="profile-line-data">{dataUser.createdAt}</p> </td>
+                        </tr>
+                    </table>
+
+                    {dataUser.moderator == true ?
+
+                        <div className="card-status admin">ADMIN STATUS</div>
+                        :
+                        <div className="card-status user">USER STATUS</div>
+                    }
+
                 </div>
-               
-            </div>
+
+
+            </div >
             <button className="delete-account-button" onClick={() => setIsOpenDeleteAccModal(true)}>Supprimer mon compte</button>
-            <DeleteAccModal open={isOpenDeleteAccModal} onClose={() =>  setIsOpenDeleteAccModal(false)} >
-            Voulez-vous vraiment supprimer votre compte ?
-            <div className="answer-btn-box">
-            <button className="btn-answer yes" onClick={() => deleteAccount(dataUser.id)}>Oui</button>
-            </div>
+            <DeleteAccModal open={isOpenDeleteAccModal} onClose={() => setIsOpenDeleteAccModal(false)} >
+                Voulez-vous vraiment supprimer votre compte ?
+                <div className="answer-btn-box">
+                    <button className="btn-answer yes" onClick={() => deleteAccount(dataUser.id)}>Oui</button>
+                </div>
             </DeleteAccModal>
-        </div>
+        </div >
     )
 
 

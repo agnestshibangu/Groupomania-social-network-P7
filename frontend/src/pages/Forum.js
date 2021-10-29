@@ -9,6 +9,7 @@ import CommentSection from '../components/CommentSection';
 import DataContext from '../DataContext'
 import { useHistory } from "react-router-dom";
 import FormData from 'form-data'
+import ModifyModal from '../components/ModifyModal';
 
 
 
@@ -17,27 +18,34 @@ export default function Forum() {
 
     const history = useHistory();
 
-    const { dataUser, LStoken } = useContext(DataContext)
+    const { dataUser, LStoken, dataUserId } = useContext(DataContext)
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [posts, setPosts] = useState([])
-    //const [imageUrl, setImageUrl] = useState('')
-    //const [fakePath, setFakePath] = useState('')
     const [isOpen, setIsOpen] = useState(true)
     const [isOpenModal, setIsOpenModal] = useState(false)
+    const [isOpenModifyModal, setIsOpenModifyModal] = useState(false)
+    const [modifyPostId, setModifyPostId]= useState('')
     ///
     const [file, setFile] = useState('')
-    // const [isToggledDelMod, setisToggledDelMod] = useState(false)
 
     const userId = dataUser.id
     const moderator = dataUser.moderator
 
 
-    //  const LStoken = localStorage.getItem('token')
 
-    // function toggle() {
-    //     setIsOpen(!isOpen)
-    // }
+
+   function getPostId(postId) {
+       console.log(postId)
+   }
+
+   function openModify() {
+        setIsOpenModifyModal(true)
+   }
+
+
+
+
 
     // redirection if user is not logged //
     function redirectLogin() {
@@ -51,7 +59,6 @@ export default function Forum() {
     }, [LStoken])
 
     /////////////////////////////////////
-
     const fetchPosts = useCallback(() => {
         Axios.get('http://localhost:3001/api/post',
             {
@@ -71,28 +78,16 @@ export default function Forum() {
 
     const submitPost = useCallback(() => {
 
-        // correct fakepath error
-        // let filename = fakePath.replace(/^.*\\/, "");
-        // setImageUrl(filename)
-        // const imageUrl = filename
-        //  
         const userName = dataUser.name
         const userId = dataUser.id
-        console.log(LStoken)
-        
-        // const form =  {
-        //     
-        //         userId: userId,
-        //         userName: userName
-        //     }
-        
+        // formData auqul on ajoute un fichier + tout les champs text
         const myformData = new FormData();
         myformData.append("title", title)
         myformData.append("content", content)
         myformData.append("userId", userId)
         myformData.append("userName", userName)
+        // ajouter champ moderator
         myformData.append("file", file)
-        
 
         Axios.post("http://localhost:3001/api/post", myformData,
             {
@@ -102,16 +97,59 @@ export default function Forum() {
                 }
             }
         )
-        .then(res => console.log(res))
+            .then(res => console.log(res))
         setIsOpenModal(!isOpenModal)
+        // refresh page after submit
+        window.location.reload();
         setPosts([...posts, { title: title, content: content, image: file }])
-        // window.location.reload(false)
     }, [content, title, file, userId, posts, LStoken, isOpenModal])
+
+
+      ///////////////////////////////////
 
     useEffect(() => {
         fetchPosts();
-
     }, []);
+
+  ///////////////////////////////////
+
+ 
+
+
+  const modifyPost = useCallback(() => {
+
+    console.log(modifyPostId)
+
+    const userName = dataUser.name
+    const userId = dataUser.id
+    // formData auqul on ajoute un fichier + tout les champs text
+    const myformData = new FormData();
+    myformData.append("title", title)
+    myformData.append("content", content)
+    myformData.append("userId", userId)
+    myformData.append("userName", userName)
+    // ajouter champ moderator
+    myformData.append("file", file)
+
+    Axios.put("http://localhost:3001/api/post/:id", myformData,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': LStoken
+            }
+        }
+    )
+    .then(res => console.log(res))
+    setIsOpenModifyModal(!isOpenModifyModal)
+    // refresh page after submit
+    window.location.reload();
+    setPosts([...posts, { title: title, content: content, image: file }])
+}, [content, title, file, userId, posts, LStoken, isOpenModal])
+
+
+
+
+///////////////////////////////////
 
 
     const deletePost = (id, userId) => {
@@ -137,8 +175,6 @@ export default function Forum() {
                     onChange={(e) => {
                         const file = e.target.files[0]
                         setFile(file)
-                        //setFakePath(e.target.value)
-                        // setFakePath(e.target.files[0])
                     }}
                 ></input>
                 <input className="input-title" placeholder="title" name="title" type="text"
@@ -153,17 +189,38 @@ export default function Forum() {
                 <button className="submit-btn" onClick={submitPost}>SUBMIT</button>
             </Modal>
 
+        
+
+            <ModifyModal openModify={isOpenModifyModal} onClose={() =>  setIsOpenModifyModal(false)}>
+            <input className="input-file" placeholder="file" name="file" type="file" accept=".jpg"
+                    onChange={(e) => {
+                        const file = e.target.files[0]
+                        setFile(file)
+                    }}
+                ></input>
+                <input className="input-title" placeholder="title" name="title" type="text"
+                    onChange={(e) => {
+                        setTitle(e.target.value)
+                    }}
+                ></input>
+                <textarea className="input-content" placeholder="post" name="content" type="text"
+                    onChange={(e) => {
+                        setContent(e.target.value)
+                    }}></textarea>
+                <button className="submit-btn" onClick={modifyPost}>MODIFY</button>
+            </ModifyModal>
+            
+           
 
             {posts.map((post, ofUser) => {
-                console.log(post)
-
-
+               const postId = post.id
+    
                 return (
                     <div key={post.id} className="forum-card">
                         <div className="card-title-box">
                             <h2>{post.title} </h2>
                             <p className="created-by-tag-laptop">post créé par {post.userName}</p>
-                            {/* <FaEllipsisV onClick={toggle} className="three-dots" /> */}
+
                         </div>
                         <p className="created-by-tag-smartphone">post créé par {post.userName}</p>
                         <div className="card-body">
@@ -175,7 +232,7 @@ export default function Forum() {
 
                                     <div>
                                         <button className="delete-btn" onClick={() => { deletePost(post.id, post.userId) }} >DELETE</button>
-                                        <button className="modify-btn">MODIFY</button>
+                                        <button className="modify-btn" onClick={() => {openModify(); getPostId(postId);}}>MODIFY</button>
                                     </div>
 
                                     : null}

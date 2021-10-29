@@ -5,6 +5,17 @@
     height: 4px;
 }
 
+.comment-inner-container {
+    display: flex;
+    flex-direction: column;  
+}
+
+.comment-of {
+    color: #d1515a;
+    font-size: 12px;
+    font-weight: 700;
+}
+
 .comment-text {
     width: 90%;
     height: fit-content;

@@ -2,61 +2,81 @@ import '../style/home.css'
 import React, { useState, useEffect, useContext } from 'react';
 import Axios from "axios";
 import DataContext from '../DataContext'
+import { useHistory } from "react-router-dom";
 
 
 export default function Home() {
 
-    const { dataUser, LStoken } = useContext(DataContext)
-    const [latestPosts, setLatestPosts] = useState([])
-    const [hour, setHour] = useState([])
-    const [day, setDay] = useState([])
+    const history = useHistory();
+
+    // redirection if user is not logged //
+
+    function redirectLogin() {
+        history.push("/login")
+    }
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/post/lastactivitypost'
-        ,
-        {headers: {
-            Authorization: LStoken
-          }
-        })
-        .then((response) => {
-                setLatestPosts(response.data)
-                console.log(response.data.updatedAt)    
-                const data = response.data
-
-
-                function formateDate (data) {
-                // console.log(data)
-                     for (let i = 0; i < data.length; i++) {
-                       // const date = response.data[i].createdAt
-                        const str = data[i].createdAt.slice(0,10)
-                        const day = str.replaceAll('-', '/')
-                        setDay(day)
-                        const hour = data[i].createdAt.slice(11,19)
-                        setHour(hour)
-                    }
-                 }
-
-                formateDate(data)
-
-            })
+        if (!LStoken) {
+            redirectLogin()
+        }
     }, [])
 
 
 
+    const { dataUser, LStoken, dataUserId } = useContext(DataContext)
+    const [latestPosts, setLatestPosts] = useState([])
+    const [hour, setHour] = useState([])
+    const [day, setDay] = useState([])
+    console.log(dataUser)
+
     
-   
+    
+    console.log(dataUserId)
+
+    useEffect((dataUserId) => {
+
+     
+        Axios.get('http://localhost:3001/api/post/lastactivitypost',
+       
+            {
+                headers: {
+                    Authorization: LStoken
+                }
+            })
+            .then((response) => {
+                setLatestPosts(response.data)
+                console.log(response.data.updatedAt)
+                const data = response.data
+
+
+                function formateDate(data) {
+                    for (let i = 0; i < data.length; i++) {
+                        const str = data[i].createdAt.slice(0, 10)
+                        const day = str.replaceAll('-', '/')
+                        setDay(day)
+                        const hour = data[i].createdAt.slice(11, 19)
+                        setHour(hour)
+                    }
+                }
+
+                formateDate(data)
+
+            })
+    }, [LStoken, dataUserId])
+
+
 
 
 
     return (
         <div>
             <div className="home-container">
-                <h1>Bienvenue {dataUser.name} ! </h1>
-                
+                 <h1>Bienvenue {dataUser.name} ! </h1> 
+
                 <div className="wrap-container">
                     <div className="last-activities-container">
                         <h2>Dernière activités sur le forum multimédia</h2>
-                        <div className="underline"/>
+                        <div className="underline" />
 
                         <table className="table-last-activities">
                             <thead>
@@ -83,7 +103,7 @@ export default function Home() {
 
 
                     </div>
-                   
+
                 </div>
             </div>
 

@@ -2,10 +2,12 @@
     width: 100%;
     height: 100px;
     background-color: white;
-    box-shadow: 10px 10px 10px rgb(185, 185, 185);
+    box-shadow: 3px 3px 25px #091f43;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    /* position: fixed;
+    top: 0; */
 }
 
 .header-link {
@@ -21,8 +23,8 @@
 .logout-btn {
     padding: 4px;
     border: none;
-    background-color: rgb(253, 91, 91);
-    box-shadow: 5px 0px 10px rgb(255 112 112);
+    background-color: #d1515a;
+    box-shadow: 5px 0px 10px #d1515a;
     border-radius: 10px;
     height: 70px;
     width: 60%;
@@ -58,9 +60,13 @@
     background: none;
     border: none;
     font-size: 25px;
-    color:rgb(253, 91, 91); 
+    color: #d1515a; 
     margin: auto;
     
+}
+
+.text-nav-btn {
+    display: none;
 }
 
 @media (max-width: 780px) {

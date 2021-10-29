@@ -8,6 +8,7 @@ export const DataProvider = ({ children }) => {
  const [dataUser, setDataUser] = useState([])
  const LStoken = localStorage.getItem('token')
  const userId = localStorage.getItem('id')
+ const [dataUserId, setDataUserId] = useState('')
 // const isModeraror = localStorage.getItem('moderator')
 
 
@@ -15,19 +16,24 @@ useEffect(() => {
     Axios.get(`http://localhost:3001/api/user/${userId}`)
     .then((response) => {
         console.log(response.data)
+        setDataUserId(response.data.id)
         setDataUser(response.data)
     })
 }, [])
 
 
 
+
+
     return (
         <DataContext.Provider value={{
-            dataUser, LStoken
+            dataUser, LStoken, dataUserId
         }}>
             {children}
         </DataContext.Provider>
     )
 }
+
+
 
 export default DataContext;

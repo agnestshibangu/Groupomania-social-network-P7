@@ -17,15 +17,15 @@ import ForumTextP3 from './pages/ForumTextP3'
 
 import './index.css'
 import { DataProvider } from "./DataContext"
-// import GlobalStyle from './utils/style/GlobalStyle'
+
 
 
 
 
 
 ReactDOM.render(
+   
 
-  
   <Router>
     
     <Switch>

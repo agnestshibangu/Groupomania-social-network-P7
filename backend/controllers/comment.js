@@ -15,13 +15,19 @@ exports.getAllComments = (req, res) => {
 // Create a comment
 exports.createComment = (req, res, next) => {
     const CommentObject = req.body
-    console.log(req.params)
-    console.log(req.params.postId)
+    // console.log(req.params)
+    // console.log(req.params.postId)
+    console.log(req.body)
     const postId = req.params.postId
+    const userName = req.body.userName 
+    const content = req.body.content
     const comment = new Comment({
         ...CommentObject,  
-        postId: postId
+        postId: postId, 
+        userName: userName, 
+        content: content
     });
+    console.log(comment)
     comment.save()
         .then(() => res.status(201).json({ message: 'Comment registered !' }))
         .catch(error => res.status(400).json({ error }));

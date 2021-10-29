@@ -9,7 +9,7 @@ export default function Login() {
 
     const history = useHistory(); 
 
-    const { dataUser } = useContext(DataContext)
+    const { dataUser, setDataUser } = useContext(DataContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
  

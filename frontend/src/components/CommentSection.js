@@ -6,7 +6,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import '../style/Comment.css'
 
 
-export default function CommentSection({postId}) {
+export default function CommentSection({ postId }) {
 
     const { dataUser, LStoken } = useContext(DataContext)
     const [comments, setComments] = useState([])
@@ -16,17 +16,16 @@ export default function CommentSection({postId}) {
 
 
     const fetchComments = useCallback(() => {
-        Axios.get(`http://localhost:3001/api/comment/ofpost/${postId}`
-        //,
-            // {
-            //     headers: {
-            //         Authorization: LStoken
-            //     }
-            // }
+        Axios.get(`http://localhost:3001/api/comment/ofpost/${postId}`,
+            {
+                headers: {
+                    Authorization: LStoken
+                }
+            }
         )
             .then((response) => {
                 setComments(response.data)
-                console.log(response.data)
+
             })
     },
         // [LStoken]
@@ -35,36 +34,47 @@ export default function CommentSection({postId}) {
     const submitComment = useCallback(() => {
         console.log(LStoken)
         const userId = dataUser.id
+        const userName = dataUser.name
         console.log(postId)
+        console.log(userName)
         Axios.post(`http://localhost:3001/api/comment/${postId}`,
-            //   {headers: {
-            //       Authorization: LStoken
-            //    }},
             {
                 content: comment,
-                userId: userId
-            })
+                userId: userId,
+                userName: userName
+            },
+            {
+                headers: {
+                    Authorization: LStoken
+                }
+            },
+        )
         setIsOpenCommentModal(!isOpenCommentModal)
-        setComments([...comments, { comment: comment }])
+        // refresh page after submit
+        window.location.reload();
+        setComments([...comments, { comment: comment, userName: userName }])
+       
     }, [comment, postId])
 
 
     const deleteComment = (id) => {
         console.log(id)
         Axios.delete(`http://localhost:3001/api/comment/${id}`,
-            // {
-            //     headers: {
-            //         Authorization: LStoken
-            //     }
-            // }
+            {
+                headers: {
+                    Authorization: LStoken
+                }
+            }
         )
+      
         const newComments = comments.filter((comment) => comment.id !== id);
         setComments(newComments)
+          
     }
 
     useEffect(() => {
         fetchComments();
-        
+
     }, []);
 
 
@@ -84,21 +94,24 @@ export default function CommentSection({postId}) {
 
             <div className="comment-section">
                 {comments.map((comment) => {
+                   
                     return (
                         <div className="comment-single">
-                            <p>commentaire de {comment.userName}</p>
-                            <p className="comment-text">{comment.content}</p>
+                            <div className="comment-inner-container">
+                                <p className="comment-of">- commentaire créé par {comment.userName} -</p>
+                                <p className="comment-text">{comment.content}</p>
+                            </div>
 
-                        { comment.userId == userId || dataUser.moderator == true ? 
+                            {comment.userId == userId || dataUser.moderator == true ?
 
-                         <FaTrashAlt className="delete-comment-btn" onClick={() => deleteComment(comment.id)} />
+                                <FaTrashAlt className="delete-comment-btn" onClick={() => deleteComment(comment.id)} />
 
-                         : null 
-                        
-                        }
+                                : null
+
+                            }
 
 
-                           
+
                         </div>
                     )
                 })}
