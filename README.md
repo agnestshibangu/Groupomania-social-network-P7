@@ -1,6 +1,8 @@
 # P7_01-10-21_Agnes_Tshibangu
 --- groupomania social network (React, express, Mysql, NodeJs) ---
 
+link to github repo: https://github.com/agnestshibangu/P7_01-10-21_Agnes_Tshibangu
+
 The goal for this project was to create a social network for the company Groupomania to improve communication among its employees. 
 Using Express and NodeJs for the backend and React for the frontend, this API has a login and authentication system (JWT), displays the lastest activities and allows users to share their ideas thank to a forum where photos, posts and comments can be exchanged.
 
