@@ -11,15 +11,20 @@ router.get('/', auth, postCtrl.getAllPosts)
 // GET last three posts
 router.get('/lastactivitypost', auth, postCtrl.getLastActivityPost)
 
+// UPDATE //
+router.put('/:id', auth, multer, postCtrl.modifyPost);
+// router.put('/:id', auth, postsCtrl.modifyPost);
+
 // POST //
 router.post('/', auth, multer, postCtrl.createPost)
+
+
 
 // DELETE //
 router.delete('/:id', auth, commentCtrl.deleteAllComments, postCtrl.deletePost)
 //router.delete('/:id', auth, commentCtrl.deleteAllComments, postCtrl.deletePost)
 
-// UPDATE //
-router.put('/:id', auth, postCtrl.modifyPost)
+
 
 
  

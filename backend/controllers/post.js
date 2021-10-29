@@ -23,6 +23,7 @@ exports.getLastActivityPost = (req, res) => {
 
 // Create a post
 exports.createPost = (req, res, next) => {
+    console.log(req.body)
     const postObject = req.body
     const userId = req.body.userId
     console.log(userId)
@@ -40,6 +41,21 @@ exports.createPost = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
+// Modify a post 
+exports.modifyPost = (req, res) => {
+     console.log(req.body)
+    const postObject = req.body
+    Post.findOne({
+        where: { id: req.params.id }
+    })
+        .then(Post => {
+            Post.update(postObject)
+        })
+        .then(() => res.status(200).json({ Post }))
+        .catch(error => res.status(400).json({ error }));
+}
+
+
 
 // Delete a post 
 exports.deletePost = (req, res) => {
@@ -51,20 +67,6 @@ exports.deletePost = (req, res) => {
         })
 
         .then(() => res.status(200).json({ message: 'post supprimé !' }))
-        .catch(error => res.status(400).json({ error }));
-}
-
-// Modify a post 
-exports.modifyPost = (req, res) => {
-    console.log("req.body :" + JSON.stringify(req.body));
-    const postObject = req.body;
-    Post.findOne({
-        where: { id: req.params.id }
-    })
-        .then(Post => {
-            Post.update(postObject)
-        })
-        .then(() => res.status(200).json({ message: 'post modifié !' }))
         .catch(error => res.status(400).json({ error }));
 }
 
