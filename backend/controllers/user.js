@@ -52,8 +52,13 @@ exports.getLastSignup = (req, res) => {
 
 // signup
 exports.signup = async (req, res, next) => {
-  bcrypt.hash(req.body.password, 10)
-    .then(hash => {
+  User.findOne({
+    where: { email: req.body.email }
+})   
+ .then(user => {              
+   if (!user) {
+   bcrypt.hash(req.body.password, 10)
+     .then(hash => {
       const user = new User({
         name: req.body.name,
         email: req.body.email,
@@ -64,6 +69,8 @@ exports.signup = async (req, res, next) => {
         .then(() => res.status(201).json({ message: user }))
         .catch(error => res.status(400).json({ error }));
     })
+   }
+ })
     .catch(error => res.status(500).json({ error }));
 };
 

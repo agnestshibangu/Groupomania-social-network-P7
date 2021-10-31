@@ -13,6 +13,7 @@ export default function Profile() {
     const [isprofileDeleted, setisprofileDeleted] = useState(false)
 
     const { dataUser, LStoken } = useContext(DataContext)
+ 
 
     // redirection if user is not logged //
 
@@ -26,10 +27,13 @@ export default function Profile() {
         }
     }, [])
 
+
+
     /////////////////////////////////////
 
 
-    function deleteAccount(id) {
+    function deleteAccount() {
+      //  function deleteAccount(id) {
         Axios.delete(`http://localhost:3001/api/user/delete/${dataUser.id}`)
             .then((response) => {
                 console.log(response + 'utilsateur supprimé')
@@ -38,6 +42,10 @@ export default function Profile() {
                 localStorage.setItem('id', '')
             })
     }
+
+
+       
+ 
 
     if (isprofileDeleted) {
         return (
@@ -49,12 +57,9 @@ export default function Profile() {
 
 
     return (
-
+   
         <div className="main-container">
             <h1 className="hidden-h1">Profile</h1>
-
-
-
             <div className="info-container">
                 <div className="info">
                     <h2>Informations sur le profile</h2>
@@ -62,13 +67,13 @@ export default function Profile() {
                     <table>
                         <thead className="thead">
                             <tr>
-                                <th className="column title" colspan="1">champs</th>
-                                <th className="column date" colspan="1">infos utilisateur</th>
+                                <th className="column title" colSpan="1">champs</th>
+                                <th className="column date" colSpan="1">infos utilisateur</th>
                             </tr>
                         </thead>
 
                         <tr>
-                            <td> <p className="profile-info-input">nom d'utilisateur</p> </td>
+                            <td> <p className="profile-info-input">nom d&apos;utilisateur</p> </td>
                             <td> <p className="profile-line-data"> {dataUser.name}</p> </td>
                         </tr>
 

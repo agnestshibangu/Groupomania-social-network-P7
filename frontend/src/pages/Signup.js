@@ -1,43 +1,50 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
+//import React, { useState, useContext } from 'react'
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
-import '../form.css'
-import DataContext from '../DataContext'
+import '../style/form.css'
+//import DataContext from '../DataContext'
 
 export default function Signup() {
 
     const history = useHistory();
 
-    const { dataUser } = useContext(DataContext)
+    //  const { dataUser } = useContext(DataContext)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isModerator, setIsModerator] = useState(false)
-    
+    // const [isModerator, setIsModerator] = useState(false)
+
 
     function redirect() {
         history.push("/login")
     }
 
     const emailReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/
+    const passwordReg = /^[A-Za-z0-9]\w{8,}$/
+  
 
-    
 
     const signup = () => {
         Axios.post('http://localhost:3001/api/user/signup', {
             name: name,
             email: email,
-            password: password, 
+            password: password,
         }).then((response) => {
             console.log(response)
             redirect()
         })
     }
 
-    function emailValidation(email) {
+
+    function emailValidation(email, password) {
         if (!email.match(emailReg)) {
             alert("error : email must be valid !")
-          }
+            return
+        } else if  (!password.match(passwordReg)) {
+           alert("error: password must be valid ! ")
+           return
+        }
         signup();
     }
 
@@ -51,8 +58,8 @@ export default function Signup() {
                 <div className="inputs">
 
                     <div className="input">
-                        <label for="inputName">Name:</label>
-                        <input placeholder="name" type="name" class="form-control" id="inputName" type="text"
+                        <label htmlFor="inputName">Name:</label>
+                        <input placeholder="name" className="form-control" id="inputName" type="text"
                             onChange={(e) => {
                                 setName(e.target.value)
                             }}></input>
@@ -60,25 +67,26 @@ export default function Signup() {
 
 
                     <div className="input">
-                        <label for="inputEmail">Email:</label>
-                        <input placeholder="email" type="email" class="form-control" id="inputEmail" type="text"
+                        <label htmlFor="inputEmail">Email:</label>
+                        <input placeholder="email" type="email" className="form-control" id="inputEmail"
                             onChange={(e) => {
                                 setEmail(e.target.value)
                             }}></input>
                     </div>
 
                     <div className="input">
-                        <label for="inputPassword">password:</label>
-                        <input placeholder="password" type="password" class="form-control" id="inputPassword" type="password"
+                        <label htmlFor="inputPassword">password:</label>
+                        <input placeholder="password" className="form-control" id="inputPassword" type="password"
                             onChange={(e) => {
                                 setPassword(e.target.value)
                             }}></input>
+                        <p>(Le mot de passe doit contenir au moins 8 caractères)</p>
                     </div>
 
                 </div>
 
                 <div className="button-login-container">
-                    <button className="submit-btn-login" onClick={() => signup, () => emailValidation(email)}>SUBMIT</button>
+                    <button className="submit-btn-login" onClick={() => signup, () => emailValidation(email, password)}>SUBMIT</button>
                 </div>
 
 

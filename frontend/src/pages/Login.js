@@ -1,15 +1,16 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
+// import React, { useState, useContext } from 'react'
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
-import '../form.css'
-import DataContext from '../DataContext'
+import '../style/form.css'
+// import DataContext from '../DataContext'
 import { Link } from 'react-router-dom'
 
 export default function Login() {
 
     const history = useHistory(); 
 
-    const { dataUser, setDataUser } = useContext(DataContext)
+    //const { dataUser, setDataUser } = useContext(DataContext)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
  
@@ -44,9 +45,6 @@ export default function Login() {
     }
     
 
-    
-   
-
     return (
 
         <div className="form-container">
@@ -58,8 +56,8 @@ export default function Login() {
             <div className="inputs">
 
                 <div className="input">
-                    <label for="inputEmail">Email:</label>
-                    <input placeholder="email" type="email" class="form-control" id="inputEmail" type="text"
+                    <label htmlFor="inputEmail">Email:</label>
+                    <input placeholder="email" type="email" className="form-control" id="inputEmail" 
                         onChange={(e) => {
                             setEmail(e.target.value)
                         }}></input>
@@ -67,8 +65,8 @@ export default function Login() {
                
          
                 <div className="input">
-                    <label for="inputPassword">password:</label>
-                    <input placeholder="password" type="password" class="form-control" id="inputPassword" type="password"
+                    <label htmlFor="inputPassword">password:</label>
+                    <input placeholder="password" type="password" className="form-control" id="inputPassword" 
                     onChange={(e) => {
                         setPassword(e.target.value)
                     }}></input>
@@ -84,7 +82,7 @@ export default function Login() {
                 
             </div>      
 
-            <p>Vous n'avez pas de compte ?</p>  <Link className="signup-link" to="/signup">Créer un compte</Link> 
+            <p>Vous n&apos;avez pas de compte ?</p>  <Link className="signup-link" to="/signup">Créer un compte</Link> 
            
         </div>
     )

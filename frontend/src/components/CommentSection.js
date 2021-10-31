@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react'
-import AddCommentModal from '../components/AddCommentModal'
+import AddCommentModal from './AddCommentModal'
 import DataContext from '../DataContext'
 import Axios from "axios";
 import { FaTrashAlt } from 'react-icons/fa';
@@ -53,7 +53,7 @@ export default function CommentSection({ postId }) {
         // refresh page after submit
         window.location.reload();
         setComments([...comments, { comment: comment, userName: userName }])
-       
+
     }, [comment, postId])
 
 
@@ -66,10 +66,10 @@ export default function CommentSection({ postId }) {
                 }
             }
         )
-      
+
         const newComments = comments.filter((comment) => comment.id !== id);
         setComments(newComments)
-          
+
     }
 
     useEffect(() => {
@@ -94,7 +94,7 @@ export default function CommentSection({ postId }) {
 
             <div className="comment-section">
                 {comments.map((comment) => {
-                   
+
                     return (
                         <div className="comment-single">
                             <div className="comment-inner-container">
