@@ -16,7 +16,11 @@
 }
 
 .modify {
-    background-color: rgb(189, 190, 253);
+    background-color: lightgray;
+}
+
+.btn-modify-close {
+    font-size: 25px;
 }
    
 .overlay {

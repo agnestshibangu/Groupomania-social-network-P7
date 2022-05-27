@@ -44,12 +44,19 @@ exports.createPost = (req, res, next) => {
 // Modify a post 
 exports.modifyPost = (req, res) => {
      console.log(req.body)
-    const postObject = req.body
+     const postObject = req.body
+ 
+
+    const post = req.file ? {
+        ...postObject,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`} 
+        : { ...req.body };
+
     Post.findOne({
         where: { id: req.params.id }
     })
         .then(Post => {
-            Post.update(postObject)
+            Post.update(post)
         })
         .then(() => res.status(200).json({ Post }))
         .catch(error => res.status(400).json({ error }));

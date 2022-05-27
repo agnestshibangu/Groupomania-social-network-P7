@@ -14,6 +14,7 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     // const [isModerator, setIsModerator] = useState(false)
+    const [wrongEmail, setWrongEmail] = useState(false)
 
 
     function redirect() {
@@ -33,7 +34,10 @@ export default function Signup() {
         }).then((response) => {
             console.log(response)
             redirect()
+        }).catch(() => {
+            setWrongEmail(true)
         })
+
     }
 
 
@@ -48,12 +52,19 @@ export default function Signup() {
         signup();
     }
 
+    const EmailErr = () => (
+        <div className="error-password-div">
+          This e-mail address is not available
+        </div>
+      )
+
+
+
     return (
         <div className="form-container">
             <h1 className="main-title">Sign up to Groupomania</h1>
 
             <div className="form-container-box">
-
 
                 <div className="inputs">
 
@@ -80,14 +91,15 @@ export default function Signup() {
                             onChange={(e) => {
                                 setPassword(e.target.value)
                             }}></input>
-                        <p>(Le mot de passe doit contenir au moins 8 caractères)</p>
+                        <p>(Le mot de passe doit contenir au moins 8 caractères</p>
                     </div>
+                    { wrongEmail ? <EmailErr /> : null }
+               
 
-                </div>
-
-                <div className="button-login-container">
+                
                     <button className="submit-btn-login" onClick={() => signup, () => emailValidation(email, password)}>SUBMIT</button>
-                </div>
+                
+                    </div>
 
 
             </div>

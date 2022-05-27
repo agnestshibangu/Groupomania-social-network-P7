@@ -11,7 +11,7 @@ export default function modifyModal({ openModify, children, onClose }) {
         <div>
             <div className="overlay" />
             <div className="modal modify">
-                <button className="close-btn" onClick={onClose}><GrFormClose /></button>
+                <GrFormClose className="btn-modify-close" onClick={onClose} />
                 {children}
             </div>
         </div>

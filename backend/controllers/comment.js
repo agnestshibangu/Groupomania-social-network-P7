@@ -15,8 +15,6 @@ exports.getAllComments = (req, res) => {
 // Create a comment
 exports.createComment = (req, res, next) => {
     const CommentObject = req.body
-    // console.log(req.params)
-    // console.log(req.params.postId)
     console.log(req.body)
     const postId = req.params.postId
     const userName = req.body.userName 

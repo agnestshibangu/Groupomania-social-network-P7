@@ -98,8 +98,6 @@ return (
 
                     {/* <h3>Dernière activités sur le forum de discussion</h3> */}
 
-
-
                 </div>
 
             </div>

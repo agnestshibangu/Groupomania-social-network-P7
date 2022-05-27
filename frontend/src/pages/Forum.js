@@ -15,16 +15,15 @@ export default function Forum() {
 const history = useHistory();
 
 const { dataUser, LStoken } = useContext(DataContext)
-// const { dataUser, LStoken, dataUserId } = useContext(DataContext)
 const [title, setTitle] = useState('');
 const [content, setContent] = useState('');
 const [posts, setPosts] = useState([])
-// const [isOpen, setIsOpen] = useState(true)
 const [isOpenModal, setIsOpenModal] = useState(false)
 const [isOpenModifyModal, setIsOpenModifyModal] = useState(false)
 const [modifyPostId, setModifyPostId] = useState('')
-///
 const [file, setFile] = useState('')
+
+
 
 const userId = dataUser.id
 
@@ -117,9 +116,7 @@ const modifyPost = useCallback(() => {
     myformData.append("userId", userId)
     myformData.append("userName", userName)
     myformData.append("file", file)
-
-    //Axios.post("http://localhost:3001/api/post", myformData,
-    //Axios.put('https://httpbin.org/anything' , myFormData,
+   
     Axios.put(`http://localhost:3001/api/post/${modifyPostId}`, myformData,
         {
             headers: {
@@ -127,7 +124,7 @@ const modifyPost = useCallback(() => {
             }
         }
     )
-        .then(res => console.log(res))
+    .then(res => console.log(res))
     setIsOpenModal(!isOpenModal)
     // refresh page after submit
     window.location.reload();
@@ -138,7 +135,6 @@ const modifyPost = useCallback(() => {
 
 
 const deletePost = (id) => {
-    //   const deletePost = (id, userId) => {
     Axios.delete(`http://localhost:3001/api/post/${id}`,
         {
             headers: {
@@ -218,7 +214,7 @@ return (
                             {post.userId == userId || dataUser.moderator == true ?
 
                                 <div>
-                                    <button className="delete-btn" onClick={() => { deletePost(post.id, post.userId) }} >DELETE</button>
+                                    <button className="delete-btn" onClick={() => { deletePost(post.id, post.userId) }}>DELETE</button>
                                     <button className="modify-btn" onClick={() => { openModify(); getPostId(postId); }}>MODIFY</button>
                                 </div>
 
@@ -229,6 +225,7 @@ return (
                     </div>
 
                     <p>{post.content} </p>
+                    
 
                    {/* // <DropdownDelMod open={isOpen} postId={post.id} > */}
 

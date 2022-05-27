@@ -1,28 +1,15 @@
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
-// const mysql = require('mysql2')
-const postCtrl = require('./controllers/post')
-const userCtrl = require('./controllers/user')
-const commentCtrl = require('./controllers/comment')
-const multer = require('./middleware/multer-config')
 const path = require('path');
 const helmet = require('helmet')
-///
+// const bodyParser = require('body-parser')
+// const mysql = require('mysql2')
+// const postCtrl = require('./controllers/post')
+// const userCtrl = require('./controllers/user')
+// const commentCtrl = require('./controllers/comment')
+// const multer = require('./middleware/multer-config')
 
 
-
-
-/// CORS policy ///
-
-//correct Cross Origin erros
-// const cors = require('cors')
-// app.use(
-//   cors({
-//     origin: "*",
-//     methods: ["GET", "POST", 'PUT', "DELETE", "PATCH", "OPTIONS"],
-//   })
-// )
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -35,7 +22,6 @@ app.use((req, res, next) => {
 // built-in middleware function in Express. it parses incoming requests with JSON payloads and is based on body-parser
 // payload = les données qu'on veut encoder
 
-
 app.use(express.json());
 app.use(express.urlencoded({ 
   extended: true
@@ -43,9 +29,7 @@ app.use(express.urlencoded({
 app.use(express.static('./public'));
 
 
-
- 
-// app.use(helmet());
+app.use(helmet());
 
 /// Routes ////
 

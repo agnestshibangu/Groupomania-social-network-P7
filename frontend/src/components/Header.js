@@ -13,9 +13,9 @@ function Header() {
   }
 
   function logout() {
-    // localStorage.setItem('token', '')
-    // localStorage.setItem('id', '')
+   
     localStorage.clear();
+    setShow(!show)
     redirect()
   }
 
@@ -40,9 +40,9 @@ function Header() {
 
         <Link className="header-link" onClick={displayLinks} to="/">Accueil</Link>
         <Link className="header-link" onClick={displayLinks} to="/profile"> Profile</Link>
-        <Link className="header-link" onClick={displayLinks} to="/forum"> forum</Link>
-        <Link className="header-link" onClick={displayLinks} to="/login"> login</Link>
-        <Link className="header-link" onClick={displayLinks} to="/signup"> signup</Link>
+        <Link className="header-link" onClick={displayLinks} to="/forum"> Forum</Link>
+        <Link className="header-link" onClick={displayLinks} to="/login"> Login</Link>
+        <Link className="header-link" onClick={displayLinks} to="/signup"> Signup</Link>
         <button className="logout-btn" onClick={logout}>Logout</button>
 
       </nav>

@@ -25,7 +25,6 @@ export default function CommentSection({ postId }) {
         )
             .then((response) => {
                 setComments(response.data)
-
             })
     },
         // [LStoken]
